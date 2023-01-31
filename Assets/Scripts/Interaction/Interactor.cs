@@ -35,7 +35,7 @@ public class Interactor : MonoBehaviour
     /// <summary>
     /// Sets the interact icon to disabled.
     /// </summary>
-    void Start()
+    private void Start()
     {
         interactIcon.SetActive(false);
     }
@@ -43,7 +43,7 @@ public class Interactor : MonoBehaviour
     /// <summary>
     /// Consistently checks for interactable objects.
     /// </summary>
-    void Update()
+    private void Update()
     {
         numFound = Physics2D.OverlapCircleNonAlloc(interactionPoint.position, interactionPointRadius, 
             _colliders, interactableMask);
