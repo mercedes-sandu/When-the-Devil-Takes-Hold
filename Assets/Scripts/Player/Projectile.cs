@@ -56,7 +56,7 @@ public class Projectile : MonoBehaviour
     /// </summary>
     public void Shoot()
     {
-        _lookDirection = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        _lookDirection = _camera.ScreenToWorldPoint(Input.mousePosition) - PlayerControl.Instance.transform.position;
         _lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
         firePoint.rotation = Quaternion.Euler(0, 0, _lookAngle);
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
