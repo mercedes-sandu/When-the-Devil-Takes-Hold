@@ -19,6 +19,29 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Projectile projectile;
 
     /// <summary>
+    /// The player's max health.
+    /// </summary>
+    [SerializeField] static int maxHealth = 100;
+
+    /// <summary>
+    /// The player's current health.
+    /// </summary>
+    [SerializeField] int currentHealth = maxHealth;
+
+    /// <summary>
+    /// Property for other scripts to access currentHealth
+    /// </summary>
+    public float CurrentHealth => currentHealth;
+
+    /// <summary>
+    /// Test values for player health.
+    /// </summary>
+    [SerializeField]
+    int testHeal = 10;
+    [SerializeField]
+    int testDamage = -10;
+
+    /// <summary>
     /// The player's rigidbody component.
     /// </summary>
     private Rigidbody2D _rb;
@@ -54,6 +77,21 @@ public class PlayerControl : MonoBehaviour
         HandleMovement();
         HandleMouseDirection();
         HandleShooting();
+        TestHealth();
+    }
+
+    /// <summary>
+    /// Takes the amount of damage/healing done as an input and changes player health.
+    /// </summary>
+    public void UpdateHealth(int amount)
+    {
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        if (currentHealth == 0)
+        {
+            SelfDestruct();
+        }
     }
     
     /// <summary>
@@ -85,6 +123,30 @@ public class PlayerControl : MonoBehaviour
     }
 
     /// <summary>
+    /// Testing health.
+    /// </summary>
+    private void TestHealth()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            UpdateHealth(testHeal);
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            UpdateHealth(testDamage);
+        }
+    }
+
+    /// <summary>
+    /// Self destructs
+    /// </summary>
+    private void SelfDestruct()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+        projectile.GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    /// <summary>
     /// Handles the direction in which the player is facing from mouse location.
     /// </summary>
     private void HandleMouseDirection()
@@ -111,6 +173,7 @@ public class PlayerControl : MonoBehaviour
     private void HandleShooting()
     {
         if (!Input.GetMouseButtonDown(0)) return;
+        if (GetComponent<SpriteRenderer>().enabled == false) return;
 
         projectile.Shoot();
     }
