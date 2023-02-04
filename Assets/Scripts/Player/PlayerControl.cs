@@ -19,6 +19,11 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Projectile projectile;
 
     /// <summary>
+    /// The player's health bar.
+    /// </summary>
+    [SerializeField] private PlayerHealthBar healthBar;
+
+    /// <summary>
     /// The player's max health.
     /// </summary>
     [SerializeField] static int maxHealth = 100;
@@ -29,9 +34,10 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] int currentHealth = maxHealth;
 
     /// <summary>
-    /// Property for other scripts to access currentHealth
+    /// Property for other scripts to access currentHealth and maxHealth
     /// </summary>
     public float CurrentHealth => currentHealth;
+    public float MaxHealth => maxHealth;
 
     /// <summary>
     /// Test values for player health.
@@ -87,6 +93,8 @@ public class PlayerControl : MonoBehaviour
     {
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        healthBar.UpdateHealthBar();
 
         if (currentHealth == 0)
         {
