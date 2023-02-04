@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -8,7 +9,7 @@ public class PlayerControl : MonoBehaviour
     /// The instance of the player accessible by all classes.
     /// </summary>
     public static PlayerControl Instance = null;
-    
+
     /// <summary>
     /// The player's movement speed.
     /// </summary>
@@ -37,10 +38,9 @@ public class PlayerControl : MonoBehaviour
     /// <summary>
     /// Test values for player health.
     /// </summary>
-    [SerializeField]
-    int testHeal = 10;
-    [SerializeField]
-    int testDamage = -10;
+    [SerializeField] int testHeal = 10;
+
+    [SerializeField] int testDamage = -10;
 
     /// <summary>
     /// The player's rigidbody component.
@@ -63,6 +63,11 @@ public class PlayerControl : MonoBehaviour
     private Animator _anim;
 
     /// <summary>
+    /// The slope of the diagonal along the screen.
+    /// </summary>
+    private float _slope;
+
+    /// <summary>
     /// Initializes components and variables.
     /// </summary>
     private void Awake()
@@ -75,10 +80,11 @@ public class PlayerControl : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _camera = Camera.main;
+        _slope = Screen.height / Screen.width;
     }
 
     /// <summary>
@@ -87,7 +93,7 @@ public class PlayerControl : MonoBehaviour
     private void Update()
     {
         HandleMovement();
-        HandleMouseDirection();
+        // HandleMouseDirection();
         HandleShooting();
         TestHealth();
     }
@@ -105,11 +111,11 @@ public class PlayerControl : MonoBehaviour
             SelfDestruct();
         }
     }
-    
+
     /// <summary>
     /// Moves the player in the correct direction based on arrow keys or WASD.
     /// </summary>
-    private void HandleMovement() 
+    private void HandleMovement()
     {
         Vector2 dir = Vector2.zero;
 
@@ -148,6 +154,7 @@ public class PlayerControl : MonoBehaviour
         {
             UpdateHealth(testHeal);
         }
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             UpdateHealth(testDamage);
@@ -163,6 +170,7 @@ public class PlayerControl : MonoBehaviour
         projectile.GetComponent<SpriteRenderer>().enabled = false;
     }
 
+    // todo: mercedes fix this
     /// <summary>
     /// Handles the direction in which the player is facing from mouse location.
     /// </summary>
@@ -170,18 +178,31 @@ public class PlayerControl : MonoBehaviour
     {
         Vector2 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 playerPos = _camera.ScreenToWorldPoint(transform.position);
+        Vector2 dir = Vector2.zero;
         
-        // todo: may need to change the sprite to look right
-        transform.localScale = new Vector3(1, mousePos.x >= playerPos.x ? 1 : -1, 1);
+        if (mousePos.x <= playerPos.x && Math.Abs(playerPos.y) <= _slope * playerPos.x)
+        {
+            dir.x = -1;
+            _direction = Vector2.left;
+        }
+        else if (mousePos.x >= playerPos.x && Math.Abs(playerPos.y) <= _slope * playerPos.x)
+        {
+            dir.x = 1;
+            _direction = Vector2.right;
+        }
+
+        if (mousePos.y <= playerPos.y && Math.Abs(playerPos.x) <= 1 / _slope * playerPos.y)
+        {
+            dir.y = -1;
+            _direction = Vector2.down;
+        }
+        else if (mousePos.y >= playerPos.y && Math.Abs(playerPos.x) <= 1 / _slope * playerPos.y)
+        {
+            dir.y = 1;
+            _direction = Vector2.up;
+        }
         
-        if (mousePos.y <= playerPos.y)
-        {
-            // make the player look down (sprite)
-        }
-        else
-        {
-            // make the player look up (sprite)
-        }
+        PlayAnimation(dir);
     }
 
     /// <summary>
