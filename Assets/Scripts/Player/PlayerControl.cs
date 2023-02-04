@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class PlayerControl : MonoBehaviour
 {
     /// <summary>
@@ -52,6 +53,16 @@ public class PlayerControl : MonoBehaviour
     private Camera _camera;
 
     /// <summary>
+    /// The direction in which the player is facing.
+    /// </summary>
+    private Vector2 _direction = Vector2.down;
+
+    /// <summary>
+    /// The animator attached to the player.
+    /// </summary>
+    private Animator _anim;
+
+    /// <summary>
     /// Initializes components and variables.
     /// </summary>
     private void Awake()
@@ -66,6 +77,7 @@ public class PlayerControl : MonoBehaviour
         }
         
         _rb = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<Animator>();
         _camera = Camera.main;
     }
 
@@ -104,21 +116,26 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             dir.y = 1f;
+            _direction = Vector2.up;
         }
         else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             dir.y = -1f;
+            _direction = Vector2.down;
         }
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             dir.x = 1f;
+            _direction = Vector2.right;
         }
         else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             dir.x = -1f;
+            _direction = Vector2.left;
         }
 
+        PlayAnimation(dir);
         _rb.velocity = dir.normalized * speed;
     }
 
@@ -164,6 +181,54 @@ public class PlayerControl : MonoBehaviour
         else
         {
             // make the player look up (sprite)
+        }
+    }
+
+    /// <summary>
+    /// Animates the player walking.
+    /// </summary>
+    /// <param name="direction"></param>
+    private void PlayAnimation(Vector2 direction)
+    {
+        switch (direction.y)
+        {
+            case -1:
+                _anim.Play("PlayerFrontWalk");
+                break;
+            case 1:
+                _anim.Play("PlayerBackWalk");
+                break;
+            default:
+                switch (direction.x)
+                {
+                    case -1:
+                        _anim.Play("PlayerLeftWalk");
+                        break;
+                    case 1:
+                        _anim.Play("PlayerRightWalk");
+                        break;
+                    default:
+                        if (_direction == Vector2.right)
+                        {
+                            _anim.Play("PlayerRightIdle");
+                        }
+                        else if (_direction == Vector2.left)
+                        {
+                            _anim.Play("PlayerLeftIdle");
+                        }
+                        else if (_direction == Vector2.up)
+                        {
+                            _anim.Play("PlayerBackIdle");
+                        }
+                        else
+                        {
+                            _anim.Play("PlayerFrontIdle");
+                        }
+
+                        break;
+                }
+
+                break;
         }
     }
 
