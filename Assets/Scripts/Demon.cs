@@ -5,7 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class Demon : MonoBehaviour
-{
+{ 
+    public static Demon Instance = null;
 
     public GameObject FireballPrefab;
 
@@ -16,10 +17,26 @@ public class Demon : MonoBehaviour
     public float fireTime;
     private int timeTick;
 
+    [SerializeField] public static int maxHealth = 100;
+    [SerializeField] public int currentHealth = maxHealth;
+    [SerializeField] private EnemyHealthBar healthBar;
+
     // Start is called before the first frame update
     void Start()
     {
-        timeTick = 0;
+
+    }
+
+    private void Awake()
+    {
+        if (!Instance)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -41,13 +58,24 @@ public class Demon : MonoBehaviour
         }
     }
 
+    public void UpdateHealth(int damage)
+    {
+        currentHealth += damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        healthBar.UpdateHealthBar();
+
+        if (currentHealth == 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void FireProjectile()
     {
         Vector3 ball_pos = new Vector3(transform.position.x + fireballDistance, transform.position.y + fireballY, transform.position.z);
         GameObject fireball = Instantiate(FireballPrefab, ball_pos, Quaternion.identity);
-        //fireball.GetComponent<Rigidbody2D>().velocity = new Vector2(fireballVelocity, 0);
         fireball.GetComponent<AIDestinationSetter>().target = PlayerControl.Instance.gameObject.transform;
     }
 
-    // PlayerControl.Instance
 }

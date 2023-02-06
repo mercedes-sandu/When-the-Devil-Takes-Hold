@@ -9,6 +9,11 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speed;
 
     /// <summary>
+    /// The amount of damage the bullet does.
+    /// </summary>
+    [SerializeField] private int damage;
+
+    /// <summary>
     /// The bullet's rigidbody component.
     /// </summary>
     [SerializeField] private Rigidbody2D rb;
@@ -26,6 +31,15 @@ public class Bullet : MonoBehaviour
     /// </summary>
     private void OnBecameInvisible()
     {
+        Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Demon.Instance.UpdateHealth(damage);
+        }
         Destroy(gameObject);
     }
 }
