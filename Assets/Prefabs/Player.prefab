@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 725107208155703278}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,7 +154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  projectile: {fileID: 8698158627162034505}
+  weapon: {fileID: 0}
+  healthBar: {fileID: 0}
   currentHealth: 100
   testHeal: 10
   testDamage: -10

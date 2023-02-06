@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -13,6 +14,8 @@ public class Bullet : MonoBehaviour
     /// </summary>
     [SerializeField] private Rigidbody2D rb;
 
+    [SerializeField] private int damage = -5;
+
     /// <summary>
     /// Starts the bullet's existence.
     /// </summary>
@@ -26,6 +29,18 @@ public class Bullet : MonoBehaviour
     /// </summary>
     private void OnBecameInvisible()
     {
+        Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.collider.CompareTag("Player") || col.collider.CompareTag("Bullet")) return;
+
+        if (col.collider.CompareTag("Demon"))
+        {
+            Demon.Instance.UpdateHealth(damage);
+        }
+        
         Destroy(gameObject);
     }
 }

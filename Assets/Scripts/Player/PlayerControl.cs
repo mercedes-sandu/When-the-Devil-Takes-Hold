@@ -112,7 +112,7 @@ public class PlayerControl : MonoBehaviour
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        healthBar.UpdateHealthBar();
+        healthBar.UpdatePlayerHealthBar();
 
         if (currentHealth == 0)
         {
@@ -175,6 +175,7 @@ public class PlayerControl : MonoBehaviour
     private void SelfDestruct()
     {
         GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
         weapon.GetComponent<SpriteRenderer>().enabled = false;
     }
 
