@@ -18,7 +18,7 @@ public class PlayerControl : MonoBehaviour
     /// <summary>
     /// The player's projectile object (child of the player).
     /// </summary>
-    [SerializeField] private Projectile projectile;
+    [SerializeField] private Weapon weapon;
 
     /// <summary>
     /// The player's health bar.
@@ -175,7 +175,7 @@ public class PlayerControl : MonoBehaviour
     private void SelfDestruct()
     {
         GetComponent<SpriteRenderer>().enabled = false;
-        projectile.GetComponent<SpriteRenderer>().enabled = false;
+        weapon.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     // todo: mercedes fix this
@@ -269,6 +269,6 @@ public class PlayerControl : MonoBehaviour
         if (!Input.GetMouseButtonDown(0)) return;
         if (GetComponent<SpriteRenderer>().enabled == false) return;
 
-        projectile.Shoot();
+        weapon.Shoot();
     }
 }

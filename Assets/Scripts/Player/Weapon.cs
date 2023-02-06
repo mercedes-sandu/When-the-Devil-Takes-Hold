@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
     /// <summary>
     /// The projectile bullet prefab.
