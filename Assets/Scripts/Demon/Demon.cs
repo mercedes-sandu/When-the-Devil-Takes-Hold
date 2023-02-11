@@ -99,6 +99,8 @@ public class Demon : MonoBehaviour
     /// </summary>
     private void UpdateDemonHealthBar()
     {
-        healthBar.fillAmount = Mathf.Clamp(_currentHealth / MaxHealth, 0, MaxHealth);
+        healthBar.fillAmount = Mathf.Clamp((float) _currentHealth / MaxHealth, 0, MaxHealth);
+        Debug.Log("current demon health: " + _currentHealth + " / " + MaxHealth);
+        Debug.Log("demon health bar fill amount: " + healthBar.fillAmount);
     }
 }
