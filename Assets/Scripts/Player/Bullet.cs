@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -10,11 +9,14 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speed;
 
     /// <summary>
+    /// The amount of damage the bullet does.
+    /// </summary>
+    [SerializeField] private int damage;
+
+    /// <summary>
     /// The bullet's rigidbody component.
     /// </summary>
     [SerializeField] private Rigidbody2D rb;
-
-    [SerializeField] private int damage = -5;
 
     /// <summary>
     /// Starts the bullet's existence.
@@ -32,15 +34,12 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (col.collider.CompareTag("Player") || col.collider.CompareTag("Bullet")) return;
-
-        if (col.collider.CompareTag("Demon"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             Demon.Instance.UpdateHealth(damage);
         }
-        
         Destroy(gameObject);
     }
 }

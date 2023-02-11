@@ -1,15 +1,13 @@
 using Pathfinding;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Demon : MonoBehaviour
-{
+{ 
     public static Demon Instance = null;
-    
-    /// <summary>
-    /// The player's health bar.
-    /// </summary>
-    [SerializeField] private PlayerHealthBar healthBar;
-    
+
     public GameObject FireballPrefab;
 
     public float fireballDistance;
@@ -34,7 +32,17 @@ public class Demon : MonoBehaviour
     public float CurrentHealth => currentHealth;
     public float MaxHealth => maxHealth;
 
-    void Awake()
+    [SerializeField] public static int maxHealth = 100;
+    [SerializeField] public int currentHealth = maxHealth;
+    [SerializeField] private EnemyHealthBar healthBar;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    private void Awake()
     {
         if (!Instance)
         {
@@ -45,43 +53,44 @@ public class Demon : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
-    // Start is called before the first frame update
-    void Start()
+
+    // Update is called once per frame
+    void Update()
     {
-        InvokeRepeating(nameof(FireProjectile), 3, 10); // todo: change repeatrate to firetime later
+    
+    }
+
+    private void FixedUpdate()
+    {
+        if (timeTick > fireTime)
+        {
+            FireProjectile();
+            timeTick = 0;
+        }
+        else
+        {
+            timeTick++;
+        }
+    }
+
+    public void UpdateHealth(int damage)
+    {
+        currentHealth += damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        healthBar.UpdateHealthBar();
+
+        if (currentHealth == 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void FireProjectile()
     {
         Vector3 ball_pos = new Vector3(transform.position.x + fireballDistance, transform.position.y + fireballY, transform.position.z);
         GameObject fireball = Instantiate(FireballPrefab, ball_pos, Quaternion.identity);
-        //fireball.GetComponent<Rigidbody2D>().velocity = new Vector2(fireballVelocity, 0);
         fireball.GetComponent<AIDestinationSetter>().target = PlayerControl.Instance.gameObject.transform;
     }
-    
-    /// <summary>
-    /// Takes the amount of damage/healing done as an input and changes player health.
-    /// </summary>
-    public void UpdateHealth(int amount)
-    {
-        currentHealth += amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        healthBar.UpdateDemonHealthBar();
-
-        if (currentHealth == 0)
-        {
-            SelfDestruct();
-        }
-    }
-    
-    /// <summary>
-    /// Self destructs
-    /// </summary>
-    private void SelfDestruct()
-    {
-        GetComponent<SpriteRenderer>().enabled = false;
-        GetComponent<BoxCollider2D>().enabled = false;
-    }
 }
