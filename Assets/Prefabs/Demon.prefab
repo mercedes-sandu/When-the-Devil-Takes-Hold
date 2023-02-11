@@ -98,13 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564f305df92ae5c4d819b04a3eca8225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
-  FireballPrefab: {fileID: 7981336886924966667, guid: 95da64d84e28abe449619915e236f6b4, type: 3}
+  fireballPrefab: {fileID: 7981336886924966667, guid: 95da64d84e28abe449619915e236f6b4, type: 3}
   fireballDistance: 1
   fireballY: 0
-  fireballVelocity: 10
   fireTime: 200
-  currentHealth: 100
+  healthBar: {fileID: 0}
 --- !u!61 &7964112462994788744
 BoxCollider2D:
   m_ObjectHideFlags: 0

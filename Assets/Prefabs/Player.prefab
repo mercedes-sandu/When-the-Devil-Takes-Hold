@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 1696290968308299947}
   - component: {fileID: 6984087933208845933}
   - component: {fileID: 725107208155703278}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -154,11 +154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  weapon: {fileID: 0}
+  weapon: {fileID: 8698158627162034505}
   healthBar: {fileID: 0}
-  currentHealth: 100
-  testHeal: 10
-  testDamage: -10
 --- !u!61 &6984087933208845933
 BoxCollider2D:
   m_ObjectHideFlags: 0

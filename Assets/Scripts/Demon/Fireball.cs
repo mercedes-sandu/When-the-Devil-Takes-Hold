@@ -4,21 +4,38 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-    public int damage;
-    public float lifetime = 10;
+    /// <summary>
+    /// The damage this fireball causes.
+    /// </summary>
+    [SerializeField] private int damage;
+    
+    /// <summary>
+    /// The amount of time for which the fireball will be alive.
+    /// </summary>
+    [SerializeField] private float lifetime = 10;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Starts the fireball's existence.
+    /// </summary>
     void Start()
     {
         StartCoroutine(Existence());
     }
 
+    /// <summary>
+    /// Destroys the fireball after its lifetime is up.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Existence()
     {
         yield return new WaitForSeconds(lifetime);
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Does damage appropriately.
+    /// </summary>
+    /// <param name="collision">The collision with the fireball.</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Bullet") || collision.collider.CompareTag("Demon")) return;

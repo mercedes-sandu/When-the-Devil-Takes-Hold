@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -24,30 +25,17 @@ public class PlayerControl : MonoBehaviour
     /// <summary>
     /// The player's health bar.
     /// </summary>
-    [SerializeField] private PlayerHealthBar healthBar;
+    [SerializeField] private Image healthBar;
 
     /// <summary>
     /// The player's max health.
     /// </summary>
-    [SerializeField] static int maxHealth = 100;
+    [SerializeField] private static readonly int MaxHealth = 100;
 
     /// <summary>
     /// The player's current health.
     /// </summary>
-    [SerializeField] int currentHealth = maxHealth;
-
-    /// <summary>
-    /// Property for other scripts to access currentHealth and maxHealth
-    /// </summary>
-    public float CurrentHealth => currentHealth;
-    public float MaxHealth => maxHealth;
-
-    /// <summary>
-    /// Test values for player health.
-    /// </summary>
-    [SerializeField] int testHeal = 10;
-
-    [SerializeField] int testDamage = -10;
+    private int _currentHealth = MaxHealth;
 
     /// <summary>
     /// The player's rigidbody component.
@@ -102,8 +90,7 @@ public class PlayerControl : MonoBehaviour
         HandleMovement();
         // HandleMouseDirection();
         HandleShooting();
-        TestHealth();
-        
+
         if (Input.GetKeyDown(KeyCode.R)) 
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -120,12 +107,12 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     public void UpdateHealth(int amount)
     {
-        currentHealth += amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        _currentHealth += amount;
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, MaxHealth);
 
-        healthBar.UpdatePlayerHealthBar();
+        UpdatePlayerHealthBar();
 
-        if (currentHealth == 0)
+        if (_currentHealth == 0)
         {
             SelfDestruct();
         }
@@ -162,22 +149,6 @@ public class PlayerControl : MonoBehaviour
 
         PlayAnimation(dir);
         _rb.velocity = dir.normalized * speed;
-    }
-
-    /// <summary>
-    /// Testing health.
-    /// </summary>
-    private void TestHealth()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            UpdateHealth(testHeal);
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            UpdateHealth(testDamage);
-        }
     }
 
     /// <summary>
@@ -282,5 +253,13 @@ public class PlayerControl : MonoBehaviour
         if (GetComponent<SpriteRenderer>().enabled == false) return;
 
         weapon.Shoot();
+    }
+
+    /// <summary>
+    /// Updates the player health bar whenever the player takes damage or heals.
+    /// </summary>
+    private void UpdatePlayerHealthBar()
+    {
+        healthBar.fillAmount = Mathf.Clamp(_currentHealth / MaxHealth, 0, MaxHealth);
     }
 }
