@@ -40,10 +40,15 @@ public class Bullet : MonoBehaviour
     /// <param name="collision">The collision with the bullet.</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Demon"))
+        if (collision.collider.CompareTag("Demon"))
         {
             Demon.Instance.UpdateHealth(damage);
         }
+        else if (collision.collider.CompareTag("NPC"))
+        {
+            collision.collider.GetComponent<NPC>().UpdateHealth(damage);
+        }
+        
         Destroy(gameObject);
     }
 }

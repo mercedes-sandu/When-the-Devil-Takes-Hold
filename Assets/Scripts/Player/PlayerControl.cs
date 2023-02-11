@@ -260,6 +260,6 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     private void UpdatePlayerHealthBar()
     {
-        healthBar.fillAmount = Mathf.Clamp(_currentHealth / MaxHealth, 0, MaxHealth);
+        healthBar.fillAmount = Mathf.Clamp((float) _currentHealth / MaxHealth, 0, MaxHealth);
     }
 }
