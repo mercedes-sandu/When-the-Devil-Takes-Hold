@@ -21,7 +21,7 @@ public class Fireball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Bullet")) return;
+        if (collision.collider.CompareTag("Bullet") || collision.collider.CompareTag("Demon")) return;
         if (collision.collider.CompareTag("Player"))
         {
             PlayerControl.Instance.UpdateHealth(damage);

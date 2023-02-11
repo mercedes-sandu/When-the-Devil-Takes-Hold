@@ -3575,6 +3575,14 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1222216703}
+    - target: {fileID: 7964112462994788747, guid: 07bd3a26f9f9657488b71efeaf8f74bc, type: 3}
+      propertyPath: currentHealth
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7964112462994788747, guid: 07bd3a26f9f9657488b71efeaf8f74bc, type: 3}
+      propertyPath: fireballVelocity
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7964112462994788748, guid: 07bd3a26f9f9657488b71efeaf8f74bc, type: 3}
       propertyPath: m_Name
       value: Demon
@@ -3636,10 +3644,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 148707386}
-    - target: {fileID: 7981336886924966666, guid: 95da64d84e28abe449619915e236f6b4, type: 3}
-      propertyPath: orientation
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7981336886924966667, guid: 95da64d84e28abe449619915e236f6b4, type: 3}
       propertyPath: m_Name
       value: Fireball

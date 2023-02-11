@@ -21,7 +21,7 @@ public class Demon : MonoBehaviour
     /// <summary>
     /// The demon's max health.
     /// </summary>
-    [SerializeField] static int maxHealth = 100;
+    [SerializeField] static int maxHealth = 300;
     
     /// <summary>
     /// The demon's current health.
