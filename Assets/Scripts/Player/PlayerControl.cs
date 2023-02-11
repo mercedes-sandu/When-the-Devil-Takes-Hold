@@ -95,11 +95,6 @@ public class PlayerControl : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-        
-        if (Input.GetKeyDown(KeyCode.Escape)) 
-        {
-            Application.Quit();
-        }
     }
 
     /// <summary>
