@@ -8,6 +8,11 @@ public class NPC : MonoBehaviour
     [SerializeField] private static readonly int MaxHealth = 50;
 
     /// <summary>
+    /// The amount of time that will increase for the kill timer when the NPC is killed.
+    /// </summary>
+    [SerializeField] private int killTimerModifier = 10;
+
+    /// <summary>
     /// The explosion prefab.
     /// </summary>
     [SerializeField] private GameObject explosionPrefab;
@@ -56,10 +61,11 @@ public class NPC : MonoBehaviour
     }
     
     /// <summary>
-    /// Spawn explosion and kill NPC (rip).
+    /// Spawn explosion and kill NPC (rip). Also, increase the kill timer duration.
     /// </summary>
     private void SelfDestruct()
     {
+        GameEvent.ChangeKillTimerDuration(killTimerModifier);
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
