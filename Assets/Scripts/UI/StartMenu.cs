@@ -8,7 +8,7 @@ public class StartMenu : MonoBehaviour
     /// </summary>
     public void StartButton()
     {
-        SceneManager.LoadScene("DemoScene");
+        SceneManager.LoadScene("PuzzleOne");
     }
 
     /// <summary>
@@ -17,5 +17,13 @@ public class StartMenu : MonoBehaviour
     public void QuitButton()
     {
         Application.Quit();
+    }
+
+    /// <summary>
+    /// Loads the start menu.
+    /// </summary>
+    public void ReplayButton()
+    {
+        SceneManager.LoadScene("StartMenu");
     }
 }

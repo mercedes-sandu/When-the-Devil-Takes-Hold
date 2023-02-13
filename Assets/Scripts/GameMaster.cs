@@ -1,18 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// The win scene.
+    /// </summary>
+    [SerializeField] private Object winScene;
+
+    /// <summary>
+    /// The lose scene.
+    /// </summary>
+    [SerializeField] private Object loseScene;
+    
+    /// <summary>
+    /// Subscribes to game events.
+    /// </summary>
+    private void Awake()
     {
-        
+        GameEvent.OnGameOver += GameOver;
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Changes the scene to the game over scene.
+    /// </summary>
+    /// <param name="won">True if the player won, false otherwise.</param>
+    private void GameOver(bool won)
     {
-        
+        SceneManager.LoadScene(won ? winScene.name : loseScene.name);
+    }
+
+    /// <summary>
+    /// Unsubscribes from game events.
+    /// </summary>
+    private void OnDestroy()
+    {
+        GameEvent.OnGameOver -= GameOver;
     }
 }

@@ -26,6 +26,11 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private Object scene;
 
     /// <summary>
+    /// True if the kill timer is allowed in this scene, false otherwise.
+    /// </summary>
+    [SerializeField] private bool killTimerAllowed = true; // todo: remove
+
+    /// <summary>
     /// The amount of seconds left on the kill timer.
     /// </summary>
     private int _secondsLeft;
@@ -61,6 +66,7 @@ public class InGameUI : MonoBehaviour
     private void Start()
     {
         pauseMenu.enabled = false;
+        if (!killTimerAllowed) return;
         _secondsLeft = killTimerDuration;
         UpdateTimerText();
         _lastCoroutine = StartCoroutine(Countdown());
@@ -72,9 +78,26 @@ public class InGameUI : MonoBehaviour
     private void Update()
     {
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
+        SwitchGameState();
+    }
+
+    /// <summary>
+    /// Pauses/unpauses the game.
+    /// </summary>
+    public void SwitchGameState()
+    {
+        Debug.Log(_paused ? "unpaused game" : "paused game");
         pauseMenu.enabled = !_paused;
         Time.timeScale = _paused ? 1 : 0;
         _paused = !_paused;
+    }
+
+    /// <summary>
+    /// Quits the game.
+    /// </summary>
+    public void QuitButton()
+    {
+        Application.Quit();
     }
 
     /// <summary>

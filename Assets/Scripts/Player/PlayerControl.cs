@@ -90,11 +90,6 @@ public class PlayerControl : MonoBehaviour
         HandleMovement();
         // HandleMouseDirection();
         HandleShooting();
-
-        if (Input.GetKeyDown(KeyCode.R)) 
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
     }
 
     /// <summary>
@@ -154,6 +149,7 @@ public class PlayerControl : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<BoxCollider2D>().enabled = false;
         weapon.GetComponent<SpriteRenderer>().enabled = false;
+        GameEvent.EndGame(false);
     }
 
     // todo: mercedes fix this

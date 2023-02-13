@@ -52,6 +52,12 @@ public class NPC : MonoBehaviour
     }
 
     /// <summary>
+    /// Returns the NPC's current health.
+    /// </summary>
+    /// <returns>An integer of the NPC's current health.</returns>
+    public int GetCurrentHealth() => _currentHealth;
+
+    /// <summary>
     /// Progressively makes the NPC more red as they take damage (blood? who knows)
     /// </summary>
     private void UpdateNPCSpriteColor()

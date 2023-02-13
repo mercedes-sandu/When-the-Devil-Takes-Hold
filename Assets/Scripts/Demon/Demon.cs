@@ -78,10 +78,10 @@ public class Demon : MonoBehaviour
 
         UpdateDemonHealthBar();
 
-        if (_currentHealth == 0)
-        {
-            Destroy(gameObject);
-        }
+        if (_currentHealth != 0) return;
+        CancelInvoke();
+        GameEvent.EndGame(true);
+        Destroy(gameObject);
     }
 
     /// <summary>
@@ -89,8 +89,9 @@ public class Demon : MonoBehaviour
     /// </summary>
     private void FireProjectile()
     {
-        Vector3 ball_pos = new Vector3(transform.position.x + fireballDistance, transform.position.y + fireballY, transform.position.z);
-        GameObject fireball = Instantiate(fireballPrefab, ball_pos, Quaternion.identity);
+        Vector3 pos = transform.position;
+        Vector3 ballPos = new Vector3(pos.x + fireballDistance, pos.y + fireballY, pos.z);
+        GameObject fireball = Instantiate(fireballPrefab, ballPos, Quaternion.identity);
         fireball.GetComponent<AIDestinationSetter>().target = PlayerControl.Instance.gameObject.transform;
     }
 
@@ -100,7 +101,5 @@ public class Demon : MonoBehaviour
     private void UpdateDemonHealthBar()
     {
         healthBar.fillAmount = Mathf.Clamp((float) _currentHealth / MaxHealth, 0, MaxHealth);
-        Debug.Log("current demon health: " + _currentHealth + " / " + MaxHealth);
-        Debug.Log("demon health bar fill amount: " + healthBar.fillAmount);
     }
 }
