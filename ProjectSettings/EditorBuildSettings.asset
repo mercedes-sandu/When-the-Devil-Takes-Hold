@@ -12,8 +12,14 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu.unity
     guid: a039e9cc4c37fbc41b68225e834c11c3
   - enabled: 1
+    path: Assets/Scenes/StartMenu.unity
+    guid: a039e9cc4c37fbc41b68225e834c11c3
+  - enabled: 1
     path: Assets/Scenes/PuzzleOne.unity
     guid: 9a81fc79983ca2542b2f3f487d633fab
+  - enabled: 1
+    path: Assets/Scenes/PuzzleTwo.unity
+    guid: 7f6d6cb62c963a840803b6f857e491f6
   - enabled: 1
     path: Assets/Scenes/FightScene.unity
     guid: 94cf9ab57172375439bde146d3bf5bd5
@@ -23,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOverLose.unity
     guid: fad878989fd9c694580345f8295e677c
+  - enabled: 0
+    path: Assets/Scenes/NicoleBasement.unity
+    guid: d973588adc3c31e4f9c79f94cb27e616
   m_configObjects: {}

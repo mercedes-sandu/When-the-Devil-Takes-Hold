@@ -7,6 +7,7 @@ TagManager:
   - Demon
   - Bullet
   - NPC
+  - SlidingBox
   layers:
   - Default
   - TransparentFX

@@ -3597,6 +3597,10 @@ PrefabInstance:
       value: Puzzle Master
       objectReference: {fileID: 0}
     - target: {fileID: 405039816788145991, guid: 663af1abf1ac451429125f3515029323, type: 3}
+      propertyPath: nextPuzzle
+      value: 
+      objectReference: {fileID: 102900000, guid: 7f6d6cb62c963a840803b6f857e491f6, type: 3}
+    - target: {fileID: 405039816788145991, guid: 663af1abf1ac451429125f3515029323, type: 3}
       propertyPath: hasNextPuzzle
       value: 1
       objectReference: {fileID: 0}
