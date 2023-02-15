@@ -223,7 +223,7 @@ Transform:
   m_Children:
   - {fileID: 1153193188}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &19827911
 BoxCollider2D:
@@ -404,8 +404,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basementPositionObject: {fileID: 839036877}
-  usedByPlayer: 0
-  roomCenter: {x: 0, y: 0, z: 0}
+  usedByPlayer: 1
+  roomCenter: {x: 0, y: -20, z: -10}
 --- !u!70 &273546979
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -460,7 +460,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1590893905
+  m_SortingLayerID: 1936405201
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
@@ -3853,7 +3853,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1311290711
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -5546,7 +5546,7 @@ Transform:
   - {fileID: 1126630608}
   - {fileID: 1059071602}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1126630607
 GameObject:
@@ -5637,7 +5637,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1020829211
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -6211,7 +6211,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1590893905
+  m_SortingLayerID: 1936405201
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
@@ -6239,7 +6239,7 @@ Transform:
   m_Children:
   - {fileID: 937464245}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1545019267
 MonoBehaviour:
@@ -6254,8 +6254,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basementPositionObject: {fileID: 937464244}
-  usedByPlayer: 0
-  roomCenter: {x: 0, y: 0, z: 0}
+  usedByPlayer: 1
+  roomCenter: {x: 0, y: -20, z: -10}
 --- !u!1 &1701034207
 GameObject:
   m_ObjectHideFlags: 0
@@ -6266,42 +6266,16 @@ GameObject:
   m_Component:
   - component: {fileID: 1701034210}
   - component: {fileID: 1701034209}
-  - component: {fileID: 1701034208}
   - component: {fileID: 1701034211}
   - component: {fileID: 1701034212}
-  m_Layer: 8
+  - component: {fileID: 1701034213}
+  m_Layer: 9
   m_Name: SlidingBox
   m_TagString: SlidingBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &1701034208
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1701034207}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.015268922, y: 0.021850333}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.80271196, y: 0.763607}
-  m_EdgeRadius: 0
 --- !u!212 &1701034209
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6341,9 +6315,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1590893905
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4ab5afa5fd8209441815c049f71e964f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6363,7 +6337,7 @@ Transform:
   m_GameObject: {fileID: 1701034207}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.1, y: -0.74, z: 0}
-  m_LocalScale: {x: 0.8738, y: 0.9159, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -6402,6 +6376,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e956f5b74f88fd4b84972967e18e78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &1701034213
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701034207}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.28
 --- !u!1 &1844191680
 GameObject:
   m_ObjectHideFlags: 0
@@ -6596,7 +6586,7 @@ Transform:
   m_Children:
   - {fileID: 667180944}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2066574569
 GameObject:
@@ -6630,8 +6620,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basementPositionObject: {fileID: 1517872085}
-  usedByPlayer: 0
-  roomCenter: {x: 0, y: 0, z: 0}
+  usedByPlayer: 1
+  roomCenter: {x: 0, y: -20, z: -10}
 --- !u!70 &2066574571
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -6686,7 +6676,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1590893905
+  m_SortingLayerID: 1936405201
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
