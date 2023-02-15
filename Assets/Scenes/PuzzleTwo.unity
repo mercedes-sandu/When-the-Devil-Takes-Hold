@@ -6107,6 +6107,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1385440846 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1696290968308299944, guid: f7647f94c071b2542810f9b6a2e30f88, type: 3}
+  m_PrefabInstance: {fileID: 1696290968259149356}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1517872085
 GameObject:
   m_ObjectHideFlags: 0
@@ -6376,6 +6381,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e956f5b74f88fd4b84972967e18e78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPull: 0
+  playerObject: {fileID: 1385440846}
 --- !u!58 &1701034213
 CircleCollider2D:
   m_ObjectHideFlags: 0
