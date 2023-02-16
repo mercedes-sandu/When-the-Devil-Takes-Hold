@@ -253,4 +253,12 @@ public class PlayerControl : MonoBehaviour
     {
         healthBar.fillAmount = Mathf.Clamp((float) _currentHealth / MaxHealth, 0, MaxHealth);
     }
+
+    /// <summary>
+    /// returns the current rigidbody velocity of the player
+    /// </summary>
+    public Vector3 GetVelocity()
+    {
+        return _rb.velocity;
+    }
 }

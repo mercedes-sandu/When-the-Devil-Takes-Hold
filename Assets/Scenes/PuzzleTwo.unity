@@ -6274,7 +6274,7 @@ GameObject:
   - component: {fileID: 1701034211}
   - component: {fileID: 1701034212}
   - component: {fileID: 1701034213}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: SlidingBox
   m_TagString: SlidingBox
   m_Icon: {fileID: 0}
@@ -6383,6 +6383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPull: 0
   playerObject: {fileID: 1385440846}
+  normalParent: {fileID: 0}
 --- !u!58 &1701034213
 CircleCollider2D:
   m_ObjectHideFlags: 0

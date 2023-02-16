@@ -21,11 +21,22 @@ public class SlidingBox : MonoBehaviour, IInteractable
     /// </summary>
     [SerializeField] private GameObject playerObject;
 
+    /// <summary>
+    /// PlayerControl component of player
+    /// </summary>
+    private PlayerControl _playerControl;
+
+    /// <summary>
+    /// Parent object for when the boulder is not being pulled
+    /// </summary>
+    [SerializeField] private GameObject normalParent;
+
     // Start is called before the first frame update
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _playerControl = playerObject.GetComponent<PlayerControl>();
         isPull = false;
     }
 
@@ -34,7 +45,7 @@ public class SlidingBox : MonoBehaviour, IInteractable
     {
         if (isPull)
         {
-            //_rb.velocity = playerObject.transform.velocity;
+            _rb.velocity = _playerControl.GetVelocity();
         }
     }
 
