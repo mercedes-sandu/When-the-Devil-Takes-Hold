@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Pathfinding;
 using UnityEngine;
 
 public class Fireball : MonoBehaviour
@@ -15,10 +16,31 @@ public class Fireball : MonoBehaviour
     [SerializeField] private float lifetime = 10;
 
     /// <summary>
+    /// The speed of the fireball.
+    /// </summary>
+    [SerializeField] private float speed = 15;
+    
+    /// <summary>
+    /// The AI destination setter of the fireball.
+    /// </summary>
+    private AIDestinationSetter _setter;
+
+    /// <summary>
+    /// The rigidbody of the fireball.
+    /// </summary>
+    private Rigidbody2D _rb;
+
+    /// <summary>
     /// Starts the fireball's existence.
     /// </summary>
     void Start()
     {
+        _setter = GetComponent<AIDestinationSetter>();
+        _rb = GetComponent<Rigidbody2D>();
+        if (!_setter)
+        {
+            _rb.velocity = transform.right * speed;
+        }
         StartCoroutine(Existence());
     }
 

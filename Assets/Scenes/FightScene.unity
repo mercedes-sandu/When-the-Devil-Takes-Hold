@@ -3622,18 +3622,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7964112462994788747, guid: 07bd3a26f9f9657488b71efeaf8f74bc, type: 3}
-      propertyPath: damage
-      value: -20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7964112462994788747, guid: 07bd3a26f9f9657488b71efeaf8f74bc, type: 3}
-      propertyPath: offset.x
-      value: -2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7964112462994788747, guid: 07bd3a26f9f9657488b71efeaf8f74bc, type: 3}
-      propertyPath: offset.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7964112462994788747, guid: 07bd3a26f9f9657488b71efeaf8f74bc, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1222216704}
@@ -3644,10 +3632,6 @@ PrefabInstance:
     - target: {fileID: 7964112462994788747, guid: 07bd3a26f9f9657488b71efeaf8f74bc, type: 3}
       propertyPath: fireballVelocity
       value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7964112462994788747, guid: 07bd3a26f9f9657488b71efeaf8f74bc, type: 3}
-      propertyPath: movePoints.Array.size
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7964112462994788747, guid: 07bd3a26f9f9657488b71efeaf8f74bc, type: 3}
       propertyPath: movePoints.Array.data[0]

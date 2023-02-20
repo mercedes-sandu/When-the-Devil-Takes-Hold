@@ -11,9 +11,9 @@ public class Demon : MonoBehaviour
     public static Demon Instance = null;
 
     /// <summary>
-    /// The fireball prefab.
+    /// The fireball prefabs.
     /// </summary>
-    [SerializeField] private GameObject fireballPrefab;
+    [SerializeField] private GameObject[] fireballPrefabs;
 
     /// <summary>
     /// The offset at which the fireball is spawned.
@@ -199,14 +199,25 @@ public class Demon : MonoBehaviour
     }
 
     /// <summary>
-    /// Fires a projectile that will follow the player.
+    /// Fires a projectile from the list of projectile prefabs.
     /// </summary>
     private void FireProjectile()
     {
         Vector3 pos = transform.position;
         Vector3 ballPos = new Vector3(pos.x + fireballDistance, pos.y + fireballY, pos.z);
-        GameObject fireball = Instantiate(fireballPrefab, ballPos, Quaternion.identity);
-        fireball.GetComponent<AIDestinationSetter>().target = PlayerControl.Instance.gameObject.transform;
+        GameObject prefab = fireballPrefabs[Random.Range(0, fireballPrefabs.Length)];
+        AIDestinationSetter setter = prefab.GetComponent<AIDestinationSetter>();
+        if (setter)
+        {
+            GameObject fireball = Instantiate(prefab, ballPos, Quaternion.identity);
+            fireball.GetComponent<AIDestinationSetter>().target = PlayerControl.Instance.gameObject.transform;
+        }
+        else
+        {
+            Vector3 playerDirection = PlayerControl.Instance.transform.position - transform.position;
+            float lookAngle = Mathf.Atan2(playerDirection.y, playerDirection.x) * Mathf.Rad2Deg;
+            GameObject fireball = Instantiate(prefab, ballPos, Quaternion.Euler(0, 0, lookAngle));
+        }
     }
 
     /// <summary>

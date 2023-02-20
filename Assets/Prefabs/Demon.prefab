@@ -131,14 +131,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564f305df92ae5c4d819b04a3eca8225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireballPrefab: {fileID: 7981336886924966667, guid: 95da64d84e28abe449619915e236f6b4, type: 3}
+  fireballPrefabs:
+  - {fileID: 7981336886924966667, guid: 95da64d84e28abe449619915e236f6b4, type: 3}
+  - {fileID: 7981336886924966667, guid: 1197d9d0691489c48827dedce575d97c, type: 3}
   fireballDistance: 1
   fireballY: 0
   fireTime: 3
   moveTime: 1
   stayTime: 10
+  damage: -20
   healthBar: {fileID: 0}
-  movePoints: []
+  offset: {x: -2.25, y: 1, z: 0}
+  movePoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   interactionPoint: {fileID: 6976069211858052194}
   interactionPointRadius: 1.75
   interactableMask:
