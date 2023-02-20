@@ -96,11 +96,6 @@ public class Demon : MonoBehaviour
     private int _currentHealth = MaxHealth;
 
     /// <summary>
-    /// True if the demon is moving, false otherwise.
-    /// </summary>
-    private bool _moving = false;
-
-    /// <summary>
     /// The demon's animator component.
     /// </summary>
     private Animator _anim;
@@ -156,7 +151,7 @@ public class Demon : MonoBehaviour
 
         if (numFound <= 0) return;
         Attack();
-        StartCoroutine(AttackCooldown());
+        // StartCoroutine(AttackCooldown());
     }
 
     /// <summary>
@@ -174,7 +169,6 @@ public class Demon : MonoBehaviour
     private void Attack()
     {
         _anim.Play("DemonAttack");
-        PlayerControl.Instance.UpdateHealth(damage);
     }
     
     /// <summary>
@@ -228,7 +222,6 @@ public class Demon : MonoBehaviour
     /// </summary>
     private void MoveDemon()
     {
-        _moving = true;
         _anim.SetBool(Moving, true);
         StartCoroutine(MoveTo(moveTime, movePoints[Random.Range(0, movePoints.Length)].position));
     }
@@ -251,9 +244,16 @@ public class Demon : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        _moving = false;
+        
         _anim.SetBool(Moving, false);
+    }
+
+    /// <summary>
+    /// Called by the animator during the demon's attack animation.
+    /// </summary>
+    public void AttackPlayer()
+    {
+        PlayerControl.Instance.UpdateHealth(damage);
     }
     
     /// <summary>
