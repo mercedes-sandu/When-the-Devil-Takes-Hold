@@ -15,7 +15,7 @@ public class Interactor : MonoBehaviour
     /// <summary>
     /// The radius around the interaction point that will be checked for interactable objects.
     /// </summary>
-    [SerializeField] private float interactionPointRadius = 0.34f;
+    [SerializeField] private float interactionPointRadius = 1.75f;
     
     /// <summary>
     /// The layer(s) that interactable objects are on.

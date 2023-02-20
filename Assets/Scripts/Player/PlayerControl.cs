@@ -26,6 +26,21 @@ public class PlayerControl : MonoBehaviour
     /// The player's health bar.
     /// </summary>
     [SerializeField] private Image healthBar;
+    
+    /// <summary>
+    /// The flash time for the player to turn red when taking damage.
+    /// </summary>
+    [SerializeField] private float flashTime = 0.1f;
+
+    /// <summary>
+    /// The explosion prefab.
+    /// </summary>
+    [SerializeField] private GameObject explosionPrefab;
+
+    /// <summary>
+    /// The explosion animation clip.
+    /// </summary>
+    [SerializeField] private AnimationClip explosionAnimation;
 
     /// <summary>
     /// The player's max health.
@@ -58,9 +73,24 @@ public class PlayerControl : MonoBehaviour
     private Animator _anim;
 
     /// <summary>
+    /// The player's sprite renderer component.
+    /// </summary>
+    private SpriteRenderer _sr;
+
+    /// <summary>
     /// The slope of the diagonal along the screen.
     /// </summary>
     private float _slope;
+
+    /// <summary>
+    /// The normal color of the player sprite.
+    /// </summary>
+    private Color _originalColor = Color.white;
+    
+    /// <summary>
+    /// The damaged color of the player sprite.
+    /// </summary>
+    private Color _damagedColor = Color.red;
 
     /// <summary>
     /// Initializes components and variables.
@@ -78,6 +108,7 @@ public class PlayerControl : MonoBehaviour
 
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
+        _sr = GetComponent<SpriteRenderer>();
         _camera = Camera.main;
         _slope = Screen.height / Screen.width;
     }
@@ -101,6 +132,7 @@ public class PlayerControl : MonoBehaviour
         _currentHealth = Mathf.Clamp(_currentHealth, 0, MaxHealth);
 
         UpdatePlayerHealthBar();
+        FlashRed();
 
         if (_currentHealth == 0)
         {
@@ -146,10 +178,11 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     private void SelfDestruct()
     {
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<BoxCollider2D>().enabled = false;
         weapon.GetComponent<SpriteRenderer>().enabled = false;
-        GameEvent.EndGame(false);
+        Invoke(nameof(Die), explosionAnimation.length);
     }
 
     // todo: mercedes fix this
@@ -260,5 +293,30 @@ public class PlayerControl : MonoBehaviour
     public Vector3 GetVelocity()
     {
         return _rb.velocity;
+    }
+    
+    /// <summary>
+    /// Makes the player flash red when taking damage.
+    /// </summary>
+    void FlashRed()
+    {
+        _sr.color = _damagedColor;
+        Invoke(nameof(ResetColor), flashTime);
+    }
+    
+    /// <summary>
+    /// Resets the color of the player's sprite.
+    /// </summary>
+    void ResetColor()
+    {
+        _sr.color = _originalColor;
+    }
+
+    /// <summary>
+    /// Ends the game.
+    /// </summary>
+    private void Die()
+    {
+        GameEvent.EndGame(false);
     }
 }
