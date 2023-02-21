@@ -1671,7 +1671,7 @@ GameObject:
   - component: {fileID: 834896250}
   - component: {fileID: 834896249}
   - component: {fileID: 834896251}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3578,6 +3578,10 @@ PrefabInstance:
     - target: {fileID: 7964112462994788747, guid: 07bd3a26f9f9657488b71efeaf8f74bc, type: 3}
       propertyPath: currentHealth
       value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7964112462994788747, guid: 07bd3a26f9f9657488b71efeaf8f74bc, type: 3}
+      propertyPath: fireballDistance
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7964112462994788747, guid: 07bd3a26f9f9657488b71efeaf8f74bc, type: 3}
       propertyPath: fireballVelocity
