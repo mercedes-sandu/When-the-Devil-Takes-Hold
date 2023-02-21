@@ -3592,6 +3592,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7964112462994788747, guid: 07bd3a26f9f9657488b71efeaf8f74bc, type: 3}
+      propertyPath: interactionPointRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7964112462994788747, guid: 07bd3a26f9f9657488b71efeaf8f74bc, type: 3}
       propertyPath: movePoints.Array.data[0]
       value: 
       objectReference: {fileID: 267046042}
