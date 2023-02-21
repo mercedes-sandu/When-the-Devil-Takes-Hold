@@ -46,6 +46,11 @@ public class PlayerControl : MonoBehaviour
     /// The player's max health.
     /// </summary>
     [SerializeField] private static readonly int MaxHealth = 100;
+    
+    /// <summary>
+    /// True if the player can use the weapon, false otherwise.
+    /// </summary>
+    [SerializeField] private bool canUseWeapon = false;
 
     /// <summary>
     /// The player's current health.
@@ -114,13 +119,22 @@ public class PlayerControl : MonoBehaviour
     }
 
     /// <summary>
+    /// Enables/disables the player's weapon.
+    /// </summary>
+    private void Start()
+    {
+        weapon.enabled = canUseWeapon;
+        weapon.GetComponent<SpriteRenderer>().enabled = canUseWeapon;
+    }
+
+    /// <summary>
     /// Checks for input to move and animate the player.
     /// </summary>
     private void Update()
     {
         HandleMovement();
         // HandleMouseDirection();
-        HandleShooting();
+        if (canUseWeapon) HandleShooting();
     }
 
     /// <summary>
@@ -298,7 +312,7 @@ public class PlayerControl : MonoBehaviour
     /// <summary>
     /// Makes the player flash red when taking damage.
     /// </summary>
-    void FlashRed()
+    private void FlashRed()
     {
         _sr.color = _damagedColor;
         Invoke(nameof(ResetColor), flashTime);
@@ -307,7 +321,7 @@ public class PlayerControl : MonoBehaviour
     /// <summary>
     /// Resets the color of the player's sprite.
     /// </summary>
-    void ResetColor()
+    private void ResetColor()
     {
         _sr.color = _originalColor;
     }

@@ -3478,6 +3478,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 805465048}
+    - target: {fileID: 1696290968308299947, guid: f7647f94c071b2542810f9b6a2e30f88, type: 3}
+      propertyPath: canUseWeapon
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2002416895151635137, guid: f7647f94c071b2542810f9b6a2e30f88, type: 3}
       propertyPath: m_LocalScale.x
       value: -1

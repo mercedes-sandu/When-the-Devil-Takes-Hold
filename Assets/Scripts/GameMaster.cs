@@ -12,7 +12,7 @@ public class GameMaster : MonoBehaviour
     /// The lose scene.
     /// </summary>
     [SerializeField] private Object loseScene;
-    
+
     /// <summary>
     /// Subscribes to game events.
     /// </summary>
