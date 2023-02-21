@@ -106,6 +106,11 @@ public class Demon : MonoBehaviour
     private Camera _camera;
 
     /// <summary>
+    /// The demon's collider.
+    /// </summary>
+    private BoxCollider2D _collider;
+
+    /// <summary>
     /// The cached moving boolean for the animator.
     /// </summary>
     private static readonly int Moving = Animator.StringToHash("moving");
@@ -125,6 +130,7 @@ public class Demon : MonoBehaviour
         }
 
         _anim = GetComponent<Animator>();
+        _collider = GetComponent<BoxCollider2D>();
         _anim.SetBool(Moving, false);
 
         _camera = Camera.main;
@@ -194,6 +200,7 @@ public class Demon : MonoBehaviour
         UpdateDemonHealthBar();
 
         if (_currentHealth != 0) return;
+        _collider.enabled = false;
         CancelInvoke();
         _anim.Play("DemonDie");
     }
