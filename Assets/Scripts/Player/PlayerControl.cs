@@ -83,6 +83,11 @@ public class PlayerControl : MonoBehaviour
     private SpriteRenderer _sr;
 
     /// <summary>
+    /// The player's collider component.
+    /// </summary>
+    private BoxCollider2D _collider;
+
+    /// <summary>
     /// The slope of the diagonal along the screen.
     /// </summary>
     private float _slope;
@@ -114,6 +119,7 @@ public class PlayerControl : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _sr = GetComponent<SpriteRenderer>();
+        _collider = GetComponent<BoxCollider2D>();
         _camera = Camera.main;
         _slope = Screen.height / Screen.width;
     }
@@ -324,6 +330,28 @@ public class PlayerControl : MonoBehaviour
     private void ResetColor()
     {
         _sr.color = _originalColor;
+    }
+
+    /// <summary>
+    /// Hides the player by disabling the sprite renderer and collider.
+    /// </summary>
+    public void Hide()
+    {
+        _sr.enabled = false;
+        _collider.enabled = false;
+        canUseWeapon = false;
+        weapon.GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    /// <summary>
+    /// Shows the player by enabling the sprite renderer and collider.
+    /// </summary>
+    public void Show()
+    {
+        _sr.enabled = true;
+        _collider.enabled = true;
+        canUseWeapon = true;
+        weapon.GetComponent<SpriteRenderer>().enabled = true;
     }
 
     /// <summary>

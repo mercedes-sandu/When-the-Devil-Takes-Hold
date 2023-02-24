@@ -84,6 +84,21 @@ public class Demon : MonoBehaviour
     /// The number of interactable objects found.
     /// </summary>
     [SerializeField] private int numFound;
+    
+    /// <summary>
+    /// The off-screen position the demon will move to when the hide timer is up.
+    /// </summary>
+    [SerializeField] private Transform offScreenPoint;
+
+    /// <summary>
+    /// The off-screen move time.
+    /// </summary>
+    [SerializeField] private float offScreenMoveTime;
+
+    /// <summary>
+    /// The bruh sound clip.
+    /// </summary>
+    [SerializeField] private AudioClip bruhSound;
 
     /// <summary>
     /// The list of interactable objects the player can access.
@@ -99,6 +114,11 @@ public class Demon : MonoBehaviour
     /// The demon's animator component.
     /// </summary>
     private Animator _anim;
+
+    /// <summary>
+    /// The demon audio source.
+    /// </summary>
+    private AudioSource _audioSource;
 
     /// <summary>
     /// The main camera.
@@ -130,6 +150,7 @@ public class Demon : MonoBehaviour
         }
 
         _anim = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
         _collider = GetComponent<BoxCollider2D>();
         _anim.SetBool(Moving, false);
 
@@ -231,7 +252,20 @@ public class Demon : MonoBehaviour
     private void MoveDemon()
     {
         _anim.SetBool(Moving, true);
-        StartCoroutine(MoveTo(moveTime, movePoints[Random.Range(0, movePoints.Length)].position));
+        StartCoroutine(MoveTo(moveTime, movePoints[Random.Range(0, movePoints.Length)].position, false));
+    }
+
+    /// <summary>
+    /// Moves the demon off screen when the hide timer is up.
+    /// </summary>
+    public void MoveDemonOffScreen()
+    {
+        CancelInvoke();
+        _collider.enabled = false;
+        healthBar.enabled = false;
+        _audioSource.PlayOneShot(bruhSound);
+        _anim.SetBool(Moving, true);
+        StartCoroutine(MoveTo(offScreenMoveTime, offScreenPoint.position, true));
     }
 
     /// <summary>
@@ -239,8 +273,9 @@ public class Demon : MonoBehaviour
     /// </summary>
     /// <param name="time">The amount of time it takes to move the demon.</param>
     /// <param name="endPos">The end position of the movement.</param>
+    /// <param name="movingOffScreen">True if the demon is moving off screen, false otherwise.</param>
     /// <returns></returns>
-    private IEnumerator MoveTo(float time, Vector3 endPos)
+    private IEnumerator MoveTo(float time, Vector3 endPos, bool movingOffScreen)
     {
         Vector3 startPos = transform.position;
 
@@ -254,6 +289,7 @@ public class Demon : MonoBehaviour
         }
         
         _anim.SetBool(Moving, false);
+        if (movingOffScreen) GameMaster.Instance.TransitionToNextLevel();
     }
 
     /// <summary>

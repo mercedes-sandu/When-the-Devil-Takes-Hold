@@ -69,7 +69,11 @@ public class PuzzleMaster : MonoBehaviour
         _npcsKilled++;
         if (_npcsKilled != _npcsToKill) return;
         _puzzleSolved = true;
-        if (hasNextPuzzle) Invoke(nameof(LoadNextPuzzle), 1);
+        
+        if (!hasNextPuzzle) return;
+        GameEvent.SetNextPuzzle(nextPuzzle);
+        Debug.Log("set next puzzle to " + nextPuzzle.name + " in PuzzleMaster");
+        Invoke(nameof(LoadNextPuzzle), 1);
     }
 
     /// <summary>
