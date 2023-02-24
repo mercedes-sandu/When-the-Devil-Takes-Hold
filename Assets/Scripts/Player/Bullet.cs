@@ -46,7 +46,17 @@ public class Bullet : MonoBehaviour
         }
         else if (collision.collider.CompareTag("NPC"))
         {
-            collision.collider.GetComponent<NPC>().UpdateHealth(damage);
+            var NPC = collision.collider.GetComponent<NPC>();
+            var Mannequin = collision.collider.GetComponent<Mannequin>();
+
+            if (NPC)
+            {
+                collision.collider.GetComponent<NPC>().UpdateHealth(damage);
+            }
+            if (Mannequin)
+            {
+                collision.collider.GetComponent<Mannequin>().UpdateHealth(damage);
+            }
         }
         
         Destroy(gameObject);
