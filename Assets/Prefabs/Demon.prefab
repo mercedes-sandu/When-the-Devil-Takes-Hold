@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6976069211858052194}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Interaction Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7964112462994788747}
   - component: {fileID: 7964112462994788744}
   - component: {fileID: 5503485704400050334}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Demon
   m_TagString: Demon
   m_Icon: {fileID: 0}

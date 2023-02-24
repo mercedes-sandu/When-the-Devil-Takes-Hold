@@ -157,7 +157,6 @@ public class Demon : MonoBehaviour
 
         if (numFound <= 0) return;
         Attack();
-        // StartCoroutine(AttackCooldown());
     }
 
     /// <summary>
@@ -176,23 +175,14 @@ public class Demon : MonoBehaviour
     {
         _anim.Play("DemonAttack");
     }
-    
-    /// <summary>
-    /// Waits a second to attack again.
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator AttackCooldown()
-    {
-        yield return new WaitForSeconds(1);
-    }
 
     /// <summary>
     /// Updates the demon's health.
     /// </summary>
-    /// <param name="damage">The amount of damage the demon took.</param>
-    public void UpdateHealth(int damage)
+    /// <param name="damageDealt">The amount of damage the demon took.</param>
+    public void UpdateHealth(int damageDealt)
     {
-        _currentHealth += damage;
+        _currentHealth += damageDealt;
         _currentHealth = Mathf.Clamp(_currentHealth, 0, MaxHealth);
 
         _anim.Play("DemonHurt");
