@@ -28,6 +28,11 @@ public static class GameEvent
     public delegate void NextPuzzleHandler(Object puzzle);
 
     /// <summary>
+    /// Handles the ammo being gained by the player.
+    /// </summary>
+    public delegate void AmmoHandler(int ammoGained);
+
+    /// <summary>
     /// Detects when the kill timer should be changed.
     /// </summary>
     public static event KillTimerHandler OnKillTimerChange;
@@ -51,6 +56,11 @@ public static class GameEvent
     /// Detects when the next puzzle should be loaded after the hide timer is up.
     /// </summary>
     public static event NextPuzzleHandler OnNextPuzzle;
+    
+    /// <summary>
+    /// Detects when the player has gained ammo.
+    /// </summary>
+    public static event AmmoHandler OnAmmoGain;
 
     /// <summary>
     /// Increases/decreases the maximum kill timer duration (in seconds).
@@ -81,4 +91,10 @@ public static class GameEvent
     /// </summary>
     /// <param name="puzzle">The puzzle to be loaded.</param>
     public static void SetNextPuzzle(Object puzzle) => OnNextPuzzle?.Invoke(puzzle);
+    
+    /// <summary>
+    /// Adds the specified amount of ammo to the player's weapon.
+    /// </summary>
+    /// <param name="ammoGained">The amount of ammo the player gained.</param>
+    public static void GainAmmo(int ammoGained) => OnAmmoGain?.Invoke(ammoGained);
 }

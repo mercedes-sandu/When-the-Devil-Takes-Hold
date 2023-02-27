@@ -56,6 +56,11 @@ public class Demon : MonoBehaviour
     [SerializeField] private Image healthBar;
     
     /// <summary>
+    /// The empty health bar for the demon that displays behind the health bar.
+    /// </summary>
+    [SerializeField] private Image healthBarEmpty;
+    
+    /// <summary>
     /// The health bar UI offset
     /// </summary>
     [SerializeField] private Vector3 offset;
@@ -162,7 +167,9 @@ public class Demon : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        healthBar.transform.position = _camera.WorldToScreenPoint(transform.position + offset);
+        Vector3 pos = transform.position;
+        healthBarEmpty.transform.position = _camera.WorldToScreenPoint(pos + offset);
+        healthBar.transform.position = _camera.WorldToScreenPoint(pos + offset);
         InvokeRepeating(nameof(FireProjectile), 5, fireTime);
         InvokeRepeating(nameof(MoveDemon), stayTime, stayTime + moveTime);
     }
@@ -172,7 +179,11 @@ public class Demon : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        healthBar.transform.position = _camera.WorldToScreenPoint(transform.position + offset);
+        Vector3 pos = transform.position;
+        // transform.localScale = pos.x <= PlayerControl.Instance.transform.position.x ? 
+        //     new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
+        healthBarEmpty.transform.position = _camera.WorldToScreenPoint(pos + offset);
+        healthBar.transform.position = _camera.WorldToScreenPoint(pos + offset);
         numFound = Physics2D.OverlapCircleNonAlloc(interactionPoint.position, interactionPointRadius, 
             _colliders, interactableMask);
 
@@ -262,6 +273,7 @@ public class Demon : MonoBehaviour
     {
         CancelInvoke();
         _collider.enabled = false;
+        healthBarEmpty.enabled = false;
         healthBar.enabled = false;
         _audioSource.PlayOneShot(bruhSound);
         _anim.SetBool(Moving, true);

@@ -59,9 +59,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Clarity
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: -1903397224
   material: {fileID: 9043494722805882522}
-  materialHashCode: 0
+  materialHashCode: -868294856
   m_Version: 1.1.0
   m_SourceFontFileGUID: d95cb438ef60e8a49af4c726f3cac65f
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: d95cb438ef60e8a49af4c726f3cac65f, type: 3}
@@ -2408,6 +2408,7 @@ Material:
     - _CullMode: 0
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
+    - _Padding: 0
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0

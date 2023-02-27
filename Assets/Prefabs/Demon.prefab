@@ -135,26 +135,28 @@ MonoBehaviour:
   fireballPrefabs:
   - {fileID: 7981336886924966667, guid: 95da64d84e28abe449619915e236f6b4, type: 3}
   - {fileID: 7981336886924966667, guid: 1197d9d0691489c48827dedce575d97c, type: 3}
-  fireballDistance: 1
+  fireballDistance: 0.5
   fireballY: 0
   fireTime: 3
   moveTime: 1
-  stayTime: 10
+  stayTime: 6
   damage: -20
   healthBar: {fileID: 0}
+  healthBarEmpty: {fileID: 0}
   offset: {x: -2.25, y: 1, z: 0}
   movePoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   interactionPoint: {fileID: 6976069211858052194}
-  interactionPointRadius: 1.75
+  interactionPointRadius: 2
   interactableMask:
     serializedVersion: 2
     m_Bits: 64
   numFound: 0
   offScreenPoint: {fileID: 0}
-  bruhSound: {fileID: 0}
+  offScreenMoveTime: 3
+  bruhSound: {fileID: 8300000, guid: a761cb3b12a9a5e4396801f94e9ed84c, type: 3}
 --- !u!61 &7964112462994788744
 BoxCollider2D:
   m_ObjectHideFlags: 0

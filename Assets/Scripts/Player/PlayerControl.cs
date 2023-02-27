@@ -46,7 +46,12 @@ public class PlayerControl : MonoBehaviour
     /// The player's max health.
     /// </summary>
     [SerializeField] private static readonly int MaxHealth = 100;
-    
+
+    /// <summary>
+    /// The initial amount of bullets the player receives.
+    /// </summary>
+    [SerializeField] private static readonly int InitialBullets = 50;
+
     /// <summary>
     /// True if the player can use the weapon, false otherwise.
     /// </summary>
@@ -56,6 +61,11 @@ public class PlayerControl : MonoBehaviour
     /// The player's current health.
     /// </summary>
     private int _currentHealth = MaxHealth;
+
+    /// <summary>
+    /// The current number of bullets the player has.
+    /// </summary>
+    private int _currentBullets = InitialBullets;
 
     /// <summary>
     /// The player's rigidbody component.
@@ -353,6 +363,12 @@ public class PlayerControl : MonoBehaviour
         canUseWeapon = true;
         weapon.GetComponent<SpriteRenderer>().enabled = true;
     }
+
+    /// <summary>
+    /// Returns whether the player can use their weapon.
+    /// </summary>
+    /// <returns>True if the player can use their weapon, false otherwise.</returns>
+    public bool CanUseWeapon() => canUseWeapon;
 
     /// <summary>
     /// Ends the game.
