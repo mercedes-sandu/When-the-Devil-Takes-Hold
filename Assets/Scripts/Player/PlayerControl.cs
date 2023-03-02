@@ -13,6 +13,11 @@ public class PlayerControl : MonoBehaviour
     public static PlayerControl Instance = null;
 
     /// <summary>
+    /// True if the player can move, false otherwise.
+    /// </summary>
+    public bool CanMove = true;
+
+    /// <summary>
     /// The player's movement speed.
     /// </summary>
     [SerializeField] private float speed = 5f;
@@ -148,7 +153,7 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        HandleMovement();
+        if (CanMove) HandleMovement();
         // HandleMouseDirection();
         if (canUseWeapon) HandleShooting();
     }

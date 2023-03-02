@@ -46,11 +46,13 @@ public class HidingObject : MonoBehaviour, IInteractable
     {
         if (_hiding)
         {
+            PlayerControl.Instance.CanMove = true;
             PlayerControl.Instance.Show();
             GameEvent.StopHideTimer();
         }
         else
         {
+            PlayerControl.Instance.CanMove = false;
             PlayerControl.Instance.Hide();
             GameEvent.StartHideTimer(hideTime);
         }
