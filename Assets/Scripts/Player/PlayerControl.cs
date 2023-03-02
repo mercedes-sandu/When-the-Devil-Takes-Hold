@@ -83,6 +83,11 @@ public class PlayerControl : MonoBehaviour
     private Camera _camera;
 
     /// <summary>
+    /// The audio source component.
+    /// </summary>
+    private AudioSource _audioSource;
+
+    /// <summary>
     /// The direction in which the player is facing.
     /// </summary>
     private Vector2 _direction = Vector2.down;
@@ -135,6 +140,7 @@ public class PlayerControl : MonoBehaviour
         _anim = GetComponent<Animator>();
         _sr = GetComponent<SpriteRenderer>();
         _collider = GetComponent<BoxCollider2D>();
+        _audioSource = GetComponent<AudioSource>();
         _camera = Camera.main;
         _slope = Screen.height / Screen.width;
     }
@@ -168,6 +174,7 @@ public class PlayerControl : MonoBehaviour
 
         UpdatePlayerHealthBar();
         FlashRed();
+        _audioSource.Play();
 
         if (_currentHealth == 0)
         {
