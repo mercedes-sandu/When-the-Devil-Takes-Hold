@@ -53,11 +53,6 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private static readonly int MaxHealth = 100;
 
     /// <summary>
-    /// The initial amount of bullets the player receives.
-    /// </summary>
-    [SerializeField] private static readonly int InitialBullets = 50;
-
-    /// <summary>
     /// True if the player can use the weapon, false otherwise.
     /// </summary>
     [SerializeField] private bool canUseWeapon = false;
@@ -68,19 +63,9 @@ public class PlayerControl : MonoBehaviour
     private int _currentHealth = MaxHealth;
 
     /// <summary>
-    /// The current number of bullets the player has.
-    /// </summary>
-    private int _currentBullets = InitialBullets;
-
-    /// <summary>
     /// The player's rigidbody component.
     /// </summary>
     private Rigidbody2D _rb;
-
-    /// <summary>
-    /// The main camera.
-    /// </summary>
-    private Camera _camera;
 
     /// <summary>
     /// The audio source component.
@@ -106,11 +91,6 @@ public class PlayerControl : MonoBehaviour
     /// The player's collider component.
     /// </summary>
     private BoxCollider2D _collider;
-
-    /// <summary>
-    /// The slope of the diagonal along the screen.
-    /// </summary>
-    private float _slope;
 
     /// <summary>
     /// The normal color of the player sprite.
@@ -141,8 +121,6 @@ public class PlayerControl : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
         _collider = GetComponent<BoxCollider2D>();
         _audioSource = GetComponent<AudioSource>();
-        _camera = Camera.main;
-        _slope = Screen.height / Screen.width;
     }
 
     /// <summary>
@@ -160,7 +138,6 @@ public class PlayerControl : MonoBehaviour
     private void Update()
     {
         if (CanMove) HandleMovement();
-        // HandleMouseDirection();
         if (canUseWeapon) HandleShooting();
     }
 
@@ -225,41 +202,6 @@ public class PlayerControl : MonoBehaviour
         GetComponent<BoxCollider2D>().enabled = false;
         weapon.GetComponent<SpriteRenderer>().enabled = false;
         Invoke(nameof(Die), explosionAnimation.length);
-    }
-
-    // todo: mercedes fix this
-    /// <summary>
-    /// Handles the direction in which the player is facing from mouse location.
-    /// </summary>
-    private void HandleMouseDirection()
-    {
-        Vector2 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 playerPos = _camera.ScreenToWorldPoint(transform.position);
-        Vector2 dir = Vector2.zero;
-        
-        if (mousePos.x <= playerPos.x && Math.Abs(playerPos.y) <= _slope * playerPos.x)
-        {
-            dir.x = -1;
-            _direction = Vector2.left;
-        }
-        else if (mousePos.x >= playerPos.x && Math.Abs(playerPos.y) <= _slope * playerPos.x)
-        {
-            dir.x = 1;
-            _direction = Vector2.right;
-        }
-
-        if (mousePos.y <= playerPos.y && Math.Abs(playerPos.x) <= 1 / _slope * playerPos.y)
-        {
-            dir.y = -1;
-            _direction = Vector2.down;
-        }
-        else if (mousePos.y >= playerPos.y && Math.Abs(playerPos.x) <= 1 / _slope * playerPos.y)
-        {
-            dir.y = 1;
-            _direction = Vector2.up;
-        }
-        
-        PlayAnimation(dir);
     }
 
     /// <summary>
