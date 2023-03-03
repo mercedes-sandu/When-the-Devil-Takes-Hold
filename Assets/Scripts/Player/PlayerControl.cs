@@ -128,6 +128,7 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        MainManager.Instance.health = _currentHealth;
         weapon.enabled = canUseWeapon;
         weapon.GetComponent<SpriteRenderer>().enabled = canUseWeapon;
     }

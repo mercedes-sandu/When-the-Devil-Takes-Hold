@@ -75,6 +75,7 @@ public class Weapon : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        MainManager.Instance.ammo = _currentBullets;
         _pivot = new GameObject().transform;
         _pivot.name = "Pivot";
         _pivot.transform.position = PlayerControl.Instance.transform.position;
