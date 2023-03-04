@@ -8,6 +8,12 @@ public class HidingObject : MonoBehaviour, IInteractable
     /// The amount of time the player needs to hide to escape the demon.
     /// </summary>
     [SerializeField] private int hideTime = 5;
+
+    /// <summary>
+    /// The amount of time added (if positive) or taken away (if negative) from the kill timer when the player
+    /// successfully hides.
+    /// </summary>
+    [SerializeField] private int killTimerModifier = -5;
     
     /// <summary>
     /// The hide timer text object.
@@ -168,13 +174,14 @@ public class HidingObject : MonoBehaviour, IInteractable
     private void TransitionToNextLevel()
     {
         if (!_hiding) return;
+        MainManager.Instance.killTimerModifier = killTimerModifier;
         fadeToBlackAnim.Play("FightFadeToBlack");
     }
 
     /// <summary>
     /// Unsubscribes from game events.
     /// </summary>
-    private void Destroy()
+    private void OnDestroy()
     {
         GameEvent.OnDemonLeave -= TransitionToNextLevel;
     }

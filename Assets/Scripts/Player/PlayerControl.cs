@@ -126,7 +126,8 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        MainManager.Instance.health = _currentHealth;
+        _currentHealth = MainManager.Instance.health;
+        UpdatePlayerHealthBar();
         weapon.enabled = canUseWeapon;
         weapon.GetComponent<SpriteRenderer>().enabled = canUseWeapon;
     }
@@ -165,6 +166,7 @@ public class PlayerControl : MonoBehaviour
         _currentHealth = Mathf.Clamp(_currentHealth, 0, MaxHealth);
 
         MainManager.Instance.health = _currentHealth;
+        Debug.Log("set player health to " + _currentHealth + " in playercontrol.cs updatehealth");
         
         UpdatePlayerHealthBar();
         FlashRed();

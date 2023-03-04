@@ -372,6 +372,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45a31088921905b49946b003d3da5b1c, type: 3}
+--- !u!114 &31313513 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4445084983782355512, guid: 45a31088921905b49946b003d3da5b1c, type: 3}
+  m_PrefabInstance: {fileID: 31313512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &31313514 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8313605883104730667, guid: 45a31088921905b49946b003d3da5b1c, type: 3}
+  m_PrefabInstance: {fileID: 31313512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &31313515 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4436500725163213284, guid: 45a31088921905b49946b003d3da5b1c, type: 3}
+  m_PrefabInstance: {fileID: 31313512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,7 +488,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &519420033
 MonoBehaviour:
@@ -6497,7 +6530,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1311290711
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -9299,7 +9332,6 @@ GameObject:
   - component: {fileID: 1126630608}
   - component: {fileID: 1126630611}
   - component: {fileID: 1126630610}
-  - component: {fileID: 1126630609}
   m_Layer: 8
   m_Name: Decorations Tilemap
   m_TagString: Untagged
@@ -9322,22 +9354,6 @@ Transform:
   m_Father: {fileID: 1116441860}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!19719996 &1126630609
-TilemapCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1126630607}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_MaximumTileChangeCount: 1000
-  m_ExtrusionFactor: 0.00001
 --- !u!483693784 &1126630610
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -10001,7 +10017,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1903850315
 GameObject:
@@ -10247,7 +10263,7 @@ Transform:
   m_Children:
   - {fileID: 1517872086}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1696290968259149356
 PrefabInstance:
@@ -10307,7 +10323,7 @@ PrefabInstance:
     - target: {fileID: 1696290968308299947, guid: f7647f94c071b2542810f9b6a2e30f88, type: 3}
       propertyPath: healthBar
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 31313513}
     - target: {fileID: 2002416895151635137, guid: f7647f94c071b2542810f9b6a2e30f88, type: 3}
       propertyPath: m_LocalScale.x
       value: -1
@@ -10356,5 +10372,13 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8698158627162034505, guid: f7647f94c071b2542810f9b6a2e30f88, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 31313514}
+    - target: {fileID: 8698158627162034505, guid: f7647f94c071b2542810f9b6a2e30f88, type: 3}
+      propertyPath: bulletText
+      value: 
+      objectReference: {fileID: 31313515}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7647f94c071b2542810f9b6a2e30f88, type: 3}

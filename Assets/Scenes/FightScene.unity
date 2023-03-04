@@ -6089,6 +6089,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hideTime: 5
+  killTimerModifier: -5
   hideTimer: {fileID: 1701811182}
   fadeToBlackAnim: {fileID: 376993843964735879}
 --- !u!114 &805465048 stripped
@@ -8599,6 +8600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hideTime: 5
+  killTimerModifier: -5
   hideTimer: {fileID: 1701811182}
   fadeToBlackAnim: {fileID: 376993843964735879}
 --- !u!82 &1406281546
@@ -8954,6 +8956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hideTime: 5
+  killTimerModifier: -5
   hideTimer: {fileID: 1701811182}
   fadeToBlackAnim: {fileID: 376993843964735879}
 --- !u!1001 &1626654860
@@ -9778,6 +9781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hideTime: 5
+  killTimerModifier: -5
   hideTimer: {fileID: 1701811182}
   fadeToBlackAnim: {fileID: 376993843964735879}
 --- !u!82 &2083213593

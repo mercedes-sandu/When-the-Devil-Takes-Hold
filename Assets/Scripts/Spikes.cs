@@ -91,7 +91,6 @@ public class Spikes : MonoBehaviour
         if (!(InRange(playerPos.x, _minX, _maxX) && InRange(playerPos.y, _minY, _maxY) && !_damagedPlayer)) return;
         _damagedPlayer = true;
         PlayerControl.Instance.UpdateHealth(damage);
-        Debug.Log("damaged player");
         StartCoroutine(WaitToDamagePlayer());
     }
 
@@ -103,7 +102,6 @@ public class Spikes : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         _damagedPlayer = false;
-        Debug.Log("can now damage player");
     }
     
     /// <summary>

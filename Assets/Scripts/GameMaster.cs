@@ -1,5 +1,3 @@
-using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -71,7 +69,7 @@ public class GameMaster : MonoBehaviour
     /// <summary>
     /// Loads the specified scene, called by the fade to black animator.
     /// </summary>
-    private void LoadScene()
+    public void LoadScene()
     {
         SceneManager.LoadScene(_nextPuzzle.name);
     }

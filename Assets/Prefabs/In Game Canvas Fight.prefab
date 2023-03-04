@@ -814,6 +814,7 @@ GameObject:
   - component: {fileID: 4493054232365087957}
   - component: {fileID: 6709803436728070621}
   - component: {fileID: 5447563366016773593}
+  - component: {fileID: 5591425739959555351}
   m_Layer: 0
   m_Name: Fade To Black
   m_TagString: Untagged
@@ -899,6 +900,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5591425739959555351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088389952697476359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d9a9697b4c4f4d49a9b9993181bee18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5558246305928549056
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
@@ -75,17 +76,12 @@ public class Weapon : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        MainManager.Instance.ammo = _currentBullets;
+        _currentBullets = MainManager.Instance.ammo;
         _pivot = new GameObject().transform;
         _pivot.name = "Pivot";
         _pivot.transform.position = PlayerControl.Instance.transform.position;
         _pivot.transform.parent = PlayerControl.Instance.transform;
         transform.parent = _pivot;
-        bool canUseWeapon = PlayerControl.Instance.CanUseWeapon();
-        bulletText.enabled = canUseWeapon;
-        bullet.enabled = canUseWeapon;
-        _bulletAnim.enabled = canUseWeapon;
-        bulletText.text = canUseWeapon ? _currentBullets.ToString() : "";
     }
 
     /// <summary>
@@ -121,6 +117,8 @@ public class Weapon : MonoBehaviour
     {
         _currentBullets += ammo;
         bulletText.text = _currentBullets.ToString();
+        MainManager.Instance.ammo = _currentBullets;
+        Debug.Log("set ammo to " + _currentBullets + " in weapon.cs gainammo");
     }
 
     /// <summary>
@@ -128,6 +126,7 @@ public class Weapon : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        if (!PlayerControl.Instance.CanUseWeapon()) return;
         HandleMouseDirection();
     }
     

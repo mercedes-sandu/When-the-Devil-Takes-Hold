@@ -52,8 +52,6 @@ public class InGameUI : MonoBehaviour
     /// </summary>
     private Coroutine _lastCoroutine = null;
 
-    private bool _coroutineRunning = false;
-
     /// <summary>
     /// Subscribes to game events and initializes components.
     /// </summary>
@@ -80,21 +78,9 @@ public class InGameUI : MonoBehaviour
     {
         pauseMenu.enabled = false;
         if (!killTimerAllowed) return;
-        _secondsLeft = killTimerDuration;
+        _secondsLeft = killTimerDuration + MainManager.Instance.killTimerModifier;
+        Debug.Log("Kill timer initialized with " + _secondsLeft + " seconds.");
         UpdateTimerText();
-        _lastCoroutine = StartCoroutine(Countdown());
-    }
-
-    /// <summary>
-    /// Modifies the kill timer by the specified amount of time (in seconds).
-    /// </summary>
-    /// <param name="timeModifier">The amount of time to add/subtract from the kill timer.</param>
-    public void ModifyKillTimer(int timeModifier)
-    {
-        if (!killTimerAllowed) return;
-        _secondsLeft += timeModifier;
-        UpdateTimerText();
-        if (_coroutineRunning) StopCoroutine(_lastCoroutine);
         _lastCoroutine = StartCoroutine(Countdown());
     }
 
@@ -131,15 +117,13 @@ public class InGameUI : MonoBehaviour
     /// <returns></returns>
     private IEnumerator Countdown()
     {
-        _coroutineRunning = true;
         while (_secondsLeft > 0)
         {
             yield return new WaitForSeconds(1);
             _secondsLeft--;
             UpdateTimerText();
         }
-
-        _coroutineRunning = false;
+        
         UpdateTimerText();
         TransitionToFightScene();
     }

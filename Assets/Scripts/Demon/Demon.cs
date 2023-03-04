@@ -163,10 +163,13 @@ public class Demon : MonoBehaviour
     }
 
     /// <summary>
-    /// Starts spawning fireballs and randomly moving the demon.
+    /// Starts spawning fireballs and randomly moving the demon. Also sets player data.
     /// </summary>
     private void Start()
     {
+        PlayerControl.Instance.SetHealth(MainManager.Instance.health);
+        PlayerControl.Instance.GetWeapon().SetAmmo(MainManager.Instance.ammo);
+        
         Vector3 pos = transform.position;
         healthBarEmpty.transform.position = _camera.WorldToScreenPoint(pos + offset);
         healthBar.transform.position = _camera.WorldToScreenPoint(pos + offset);

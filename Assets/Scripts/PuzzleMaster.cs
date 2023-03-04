@@ -60,7 +60,6 @@ public class PuzzleMaster : MonoBehaviour
     {
         PlayerControl.Instance.SetHealth(MainManager.Instance.health);
         PlayerControl.Instance.GetWeapon().SetAmmo(MainManager.Instance.ammo);
-        InGameUI.Instance.ModifyKillTimer(MainManager.Instance.killTimerModifier);
         _npcsToKill = npcs.Length;
     }
 
