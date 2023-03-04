@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -95,12 +93,12 @@ public class PlayerControl : MonoBehaviour
     /// <summary>
     /// The normal color of the player sprite.
     /// </summary>
-    private Color _originalColor = Color.white;
+    private readonly Color _originalColor = Color.white;
     
     /// <summary>
     /// The damaged color of the player sprite.
     /// </summary>
-    private Color _damagedColor = Color.red;
+    private readonly Color _damagedColor = Color.red;
 
     /// <summary>
     /// Initializes components and variables.
@@ -143,6 +141,22 @@ public class PlayerControl : MonoBehaviour
     }
 
     /// <summary>
+    /// Returns the player's weapon.
+    /// </summary>
+    /// <returns>The weapon the player has.</returns>
+    public Weapon GetWeapon() => weapon;
+
+    /// <summary>
+    /// Sets the player's health to the specified amount. Called at the start of a new scene.
+    /// </summary>
+    /// <param name="amount">The amount of health the player will have.</param>
+    public void SetHealth(int amount)
+    {
+        _currentHealth = amount;
+        UpdatePlayerHealthBar();
+    }
+    
+    /// <summary>
     /// Takes the amount of damage/healing done as an input and changes player health.
     /// </summary>
     public void UpdateHealth(int amount)
@@ -150,6 +164,8 @@ public class PlayerControl : MonoBehaviour
         _currentHealth += amount;
         _currentHealth = Mathf.Clamp(_currentHealth, 0, MaxHealth);
 
+        MainManager.Instance.health = _currentHealth;
+        
         UpdatePlayerHealthBar();
         FlashRed();
         _audioSource.Play();

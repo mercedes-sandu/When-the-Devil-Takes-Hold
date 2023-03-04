@@ -54,10 +54,13 @@ public class PuzzleMaster : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the number of NPCs to kill.
+    /// Sets the number of NPCs to kill and sets the player's health.
     /// </summary>
     private void Start()
     {
+        PlayerControl.Instance.SetHealth(MainManager.Instance.health);
+        PlayerControl.Instance.GetWeapon().SetAmmo(MainManager.Instance.ammo);
+        InGameUI.Instance.ModifyKillTimer(MainManager.Instance.killTimerModifier);
         _npcsToKill = npcs.Length;
     }
 

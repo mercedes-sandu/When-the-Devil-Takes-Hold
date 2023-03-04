@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7298569741412801287}
   - component: {fileID: 7298569741412801288}
-  - component: {fileID: 7298569741412801289}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -48,24 +47,3 @@ MonoBehaviour:
   winScene: {fileID: 102900000, guid: 4ce07c0c816e3b743b2eeeee09c9bbea, type: 3}
   loseScene: {fileID: 102900000, guid: fad878989fd9c694580345f8295e677c, type: 3}
   startingPuzzle: {fileID: 102900000, guid: 9a81fc79983ca2542b2f3f487d633fab, type: 3}
-  hideTimer: {fileID: 0}
---- !u!95 &7298569741412801289
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7298569741412801284}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f3f1fdfdf0ee1c4488d4d2b343673c2f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

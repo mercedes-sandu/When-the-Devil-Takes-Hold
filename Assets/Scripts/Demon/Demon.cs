@@ -301,7 +301,7 @@ public class Demon : MonoBehaviour
         }
         
         _anim.SetBool(Moving, false);
-        if (movingOffScreen) GameMaster.Instance.TransitionToNextLevel();
+        if (movingOffScreen) GameEvent.DemonLeft();
     }
 
     /// <summary>

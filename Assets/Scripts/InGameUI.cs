@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class InGameUI : MonoBehaviour
 {
+    public static InGameUI Instance = null;
+    
     /// <summary>
     /// The pause menu canvas.
     /// </summary>
@@ -50,11 +52,22 @@ public class InGameUI : MonoBehaviour
     /// </summary>
     private Coroutine _lastCoroutine = null;
 
+    private bool _coroutineRunning = false;
+
     /// <summary>
     /// Subscribes to game events and initializes components.
     /// </summary>
     private void Awake()
     {
+        if (!Instance)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        
         _fadeToBlack = GetComponent<Animator>();
         
         GameEvent.OnKillTimerChange += ChangeKillTimerDuration;
@@ -73,6 +86,19 @@ public class InGameUI : MonoBehaviour
     }
 
     /// <summary>
+    /// Modifies the kill timer by the specified amount of time (in seconds).
+    /// </summary>
+    /// <param name="timeModifier">The amount of time to add/subtract from the kill timer.</param>
+    public void ModifyKillTimer(int timeModifier)
+    {
+        if (!killTimerAllowed) return;
+        _secondsLeft += timeModifier;
+        UpdateTimerText();
+        if (_coroutineRunning) StopCoroutine(_lastCoroutine);
+        _lastCoroutine = StartCoroutine(Countdown());
+    }
+
+    /// <summary>
     /// Pauses the game when the player presses the escape key.
     /// </summary>
     private void Update()
@@ -86,7 +112,6 @@ public class InGameUI : MonoBehaviour
     /// </summary>
     public void SwitchGameState()
     {
-        Debug.Log(_paused ? "unpaused game" : "paused game");
         pauseMenu.enabled = !_paused;
         Time.timeScale = _paused ? 1 : 0;
         _paused = !_paused;
@@ -106,12 +131,15 @@ public class InGameUI : MonoBehaviour
     /// <returns></returns>
     private IEnumerator Countdown()
     {
+        _coroutineRunning = true;
         while (_secondsLeft > 0)
         {
             yield return new WaitForSeconds(1);
             _secondsLeft--;
             UpdateTimerText();
         }
+
+        _coroutineRunning = false;
         UpdateTimerText();
         TransitionToFightScene();
     }

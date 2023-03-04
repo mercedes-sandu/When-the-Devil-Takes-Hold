@@ -100,6 +100,17 @@ public class Weapon : MonoBehaviour
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         _currentBullets--;
         bulletText.text = _currentBullets.ToString();
+        MainManager.Instance.ammo = _currentBullets;
+    }
+
+    /// <summary>
+    /// Sets the current amount of ammo of the weapon to the specified amount. Called at the start of a new scene.
+    /// </summary>
+    /// <param name="ammo">The amount of ammo the player will have.</param>
+    public void SetAmmo(int ammo)
+    {
+        _currentBullets = ammo;
+        bulletText.text = _currentBullets.ToString();
     }
     
     /// <summary>
