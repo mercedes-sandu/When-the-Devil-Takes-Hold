@@ -8,7 +8,7 @@ public class StartMenu : MonoBehaviour
     /// </summary>
     public void StartButton()
     {
-        SceneManager.LoadScene("PuzzleOne");
+        SceneManager.LoadScene("Instructions");
     }
 
     /// <summary>

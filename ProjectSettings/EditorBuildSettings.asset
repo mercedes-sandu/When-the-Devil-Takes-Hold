@@ -8,12 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StartMenu.unity
     guid: a039e9cc4c37fbc41b68225e834c11c3
   - enabled: 1
     path: Assets/Scenes/StartMenu.unity
     guid: a039e9cc4c37fbc41b68225e834c11c3
+  - enabled: 1
+    path: Assets/Scenes/Instructions.unity
+    guid: e4f389963582b2e4fb607dc5496c4d65
   - enabled: 1
     path: Assets/Scenes/PuzzleOne.unity
     guid: 9a81fc79983ca2542b2f3f487d633fab
