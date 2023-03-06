@@ -30,6 +30,11 @@ public class PuzzleMaster : MonoBehaviour
     private bool _puzzleSolved = false;
 
     /// <summary>
+    /// The audio source component (plays background music).
+    /// </summary>
+    private AudioSource _audioSource;
+
+    /// <summary>
     /// Initializes the instance.
     /// </summary>
     private void Awake()
@@ -42,6 +47,8 @@ public class PuzzleMaster : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        _audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -53,6 +60,8 @@ public class PuzzleMaster : MonoBehaviour
         PlayerControl.Instance.GetWeapon().SetAmmo(MainManager.Instance.ammo);
         
         InGameUI.Instance.SetActionText("HUNT!");
+        
+        _audioSource.Play();
     }
 
     /// <summary>
@@ -81,6 +90,7 @@ public class PuzzleMaster : MonoBehaviour
     /// </summary>
     private void LoadNextPuzzle()
     {
+        if (_audioSource.isPlaying) _audioSource.Stop();
         SceneManager.LoadScene(nextPuzzle.name);
     }
 
@@ -89,6 +99,7 @@ public class PuzzleMaster : MonoBehaviour
     /// </summary>
     private void Win()
     {
+        if (_audioSource.isPlaying) _audioSource.Stop();
         SceneManager.LoadScene("GameOverWin");
     }
 }

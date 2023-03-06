@@ -112,6 +112,11 @@ public class Demon : MonoBehaviour
     [SerializeField] private Transform[] hideObjects;
 
     /// <summary>
+    /// The background music audio source.
+    /// </summary>
+    [SerializeField] private AudioSource backgruondMusic;
+
+    /// <summary>
     /// The list of interactable objects the player can access.
     /// </summary>
     private readonly BoxCollider2D[] _colliders = new BoxCollider2D[3];
@@ -293,6 +298,8 @@ public class Demon : MonoBehaviour
         PlayerControl.Instance.SetHealth(MainManager.Instance.health);
         PlayerControl.Instance.GetWeapon().SetAmmo(MainManager.Instance.ammo);
 
+        backgruondMusic.Play();
+        
         RandomizeHideObjects();
         
         InGameUI.Instance.SetActionText("FIGHT!");
@@ -415,6 +422,7 @@ public class Demon : MonoBehaviour
     public void MoveDemonOffScreen()
     {
         CancelInvoke();
+        if (backgruondMusic.isPlaying) backgruondMusic.Stop();
         _collider.enabled = false;
         healthBarEmpty.enabled = false;
         healthBar.enabled = false;
