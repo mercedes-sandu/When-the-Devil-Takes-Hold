@@ -28,6 +28,11 @@ public static class GameEvent
     public delegate void AmmoHandler(int ammoGained);
 
     /// <summary>
+    /// Handles the player detonating TNT.
+    /// </summary>
+    public delegate void PlayerDetonateHandler();
+
+    /// <summary>
     /// Detects when the kill timer should be changed.
     /// </summary>
     public static event KillTimerHandler OnKillTimerChange;
@@ -51,6 +56,11 @@ public static class GameEvent
     /// Detects when the player has gained ammo.
     /// </summary>
     public static event AmmoHandler OnAmmoGain;
+    
+    /// <summary>
+    /// Detects when the player has detonated a TNT bomb.
+    /// </summary>
+    public static event PlayerDetonateHandler OnPlayerDetonate;
 
     /// <summary>
     /// Increases/decreases the maximum kill timer duration (in seconds).
@@ -81,4 +91,9 @@ public static class GameEvent
     /// </summary>
     /// <param name="ammoGained">The amount of ammo the player gained.</param>
     public static void GainAmmo(int ammoGained) => OnAmmoGain?.Invoke(ammoGained);
+    
+    /// <summary>
+    /// Detonates the TNT bomb and ensures that the player can no longer detonate other bombs.
+    /// </summary>
+    public static void PlayerDetonate() => OnPlayerDetonate?.Invoke();
 }

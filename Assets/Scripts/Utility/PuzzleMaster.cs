@@ -71,11 +71,17 @@ public class PuzzleMaster : MonoBehaviour
         _npcsKilled++;
         if (_npcsKilled != _npcsToKill) return;
         _puzzleSolved = true;
-        
-        if (!hasNextPuzzle) return;
-        GameEvent.SetNextPuzzle(nextPuzzle);
-        Debug.Log("set next puzzle to " + nextPuzzle.name + " in PuzzleMaster");
-        Invoke(nameof(LoadNextPuzzle), 1);
+
+        if (hasNextPuzzle)
+        {
+            GameEvent.SetNextPuzzle(nextPuzzle);
+            Debug.Log("set next puzzle to " + nextPuzzle.name + " in PuzzleMaster");
+            Invoke(nameof(LoadNextPuzzle), 1);
+        }
+        else
+        {
+            Invoke(nameof(Win), 1);
+        }
     }
 
     /// <summary>
@@ -84,5 +90,13 @@ public class PuzzleMaster : MonoBehaviour
     private void LoadNextPuzzle()
     {
         SceneManager.LoadScene(nextPuzzle.name);
+    }
+
+    /// <summary>
+    /// Takes the player to the win screen when they have completed all the levels.
+    /// </summary>
+    private void Win()
+    {
+        SceneManager.LoadScene("GameOverWin");
     }
 }

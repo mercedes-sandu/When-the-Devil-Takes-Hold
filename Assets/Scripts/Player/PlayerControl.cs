@@ -16,6 +16,11 @@ public class PlayerControl : MonoBehaviour
     public bool CanMove = true;
 
     /// <summary>
+    /// True if the player can detonate TNT, false otherwise.
+    /// </summary>
+    public bool CanDetonateTNT = true;
+
+    /// <summary>
     /// The player's movement speed.
     /// </summary>
     [SerializeField] private float speed = 5f;
@@ -24,6 +29,11 @@ public class PlayerControl : MonoBehaviour
     /// The player's projectile object (child of the player).
     /// </summary>
     [SerializeField] private Weapon weapon;
+
+    /// <summary>
+    /// The player's torch.
+    /// </summary>
+    [SerializeField] private SpriteRenderer torch;
 
     /// <summary>
     /// The player's health bar.
@@ -101,7 +111,7 @@ public class PlayerControl : MonoBehaviour
     private readonly Color _damagedColor = Color.red;
 
     /// <summary>
-    /// Initializes components and variables.
+    /// Initializes components and variables, and subscribes to game events.
     /// </summary>
     private void Awake()
     {
@@ -119,6 +129,8 @@ public class PlayerControl : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
         _collider = GetComponent<BoxCollider2D>();
         _audioSource = GetComponent<AudioSource>();
+
+        GameEvent.OnPlayerDetonate += DisableTorch;
     }
 
     /// <summary>
@@ -344,10 +356,27 @@ public class PlayerControl : MonoBehaviour
     public bool CanUseWeapon() => canUseWeapon;
 
     /// <summary>
+    /// Disables the player's torch.
+    /// </summary>
+    private void DisableTorch()
+    {
+        if (!torch) return;
+        torch.enabled = false;
+    }
+
+    /// <summary>
     /// Ends the game.
     /// </summary>
     private void Die()
     {
         GameEvent.EndGame(false);
+    }
+
+    /// <summary>
+    /// Unsubscribes from game events.
+    /// </summary>
+    private void OnDestroy()
+    {
+        GameEvent.OnPlayerDetonate -= DisableTorch;
     }
 }
