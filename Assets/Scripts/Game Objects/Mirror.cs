@@ -59,6 +59,11 @@ public class Mirror : MonoBehaviour, IInteractable
     /// True if the player is invulnerable, false otherwise.
     /// </summary>
     private bool _invulnerable = false;
+    
+    /// <summary>
+    /// True if the NPC is invulnerable, false otherwise.
+    /// </summary>
+    private bool _npcInvulnerable = false;
 
     /// <summary>
     /// Initializes the laser.
@@ -124,11 +129,13 @@ public class Mirror : MonoBehaviour, IInteractable
             laserEndpoint.transform.position - transform.position, distance);
         foreach (RaycastHit2D hit in hits)
         {
-            Debug.DrawRay(transform.position, hit.collider.transform.position - transform.position, Color.green);
             if (hit.collider.CompareTag("NPC"))
             {
-                Debug.Log("hit npc " + hit.collider.name + " with mirror " + name);
-                hit.collider.GetComponent<NPC>().UpdateHealth(damageToNPC);
+                if (!_npcInvulnerable)
+                {
+                    hit.collider.GetComponent<NPC>().UpdateHealth(damageToNPC);
+                    StartCoroutine(CooldownNPC());
+                }
             }
             if (hit.collider.CompareTag("Player"))
             {
@@ -144,6 +151,17 @@ public class Mirror : MonoBehaviour, IInteractable
     /// </summary>
     /// <returns></returns>
     private IEnumerator Cooldown()
+    {
+        _invulnerable = true;
+        yield return new WaitForSeconds(invulnerableTime);
+        _invulnerable = false;
+    }
+    
+    /// <summary>
+    /// Counts down the invulnerability time for an NPC.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator CooldownNPC()
     {
         _invulnerable = true;
         yield return new WaitForSeconds(invulnerableTime);

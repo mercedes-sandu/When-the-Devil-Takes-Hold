@@ -73,7 +73,7 @@ public class NPC : MonoBehaviour
     {
         GameEvent.ChangeKillTimerDuration(killTimerModifier);
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        PuzzleMaster.Instance.KillNPC();
+        PuzzleMaster.Instance.KillNPC(this);
         Destroy(gameObject);
     }
 }

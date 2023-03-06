@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,22 +17,12 @@ public class PuzzleMaster : MonoBehaviour
     /// <summary>
     /// The NPCs to be killed for this puzzle.
     /// </summary>
-    [SerializeField] private NPC[] npcs;
+    [SerializeField] private List<NPC> npcs;
 
     /// <summary>
     /// True if the puzzle has another puzzle level after it, false otherwise.
     /// </summary>
     [SerializeField] private bool hasNextPuzzle = false;
-
-    /// <summary>
-    /// The number of NPCs the player needs to kill in this level.
-    /// </summary>
-    private int _npcsToKill;
-
-    /// <summary>
-    /// The number of NPCs the player has killed in this level.
-    /// </summary>
-    private int _npcsKilled;
 
     /// <summary>
     /// True if the puzzle has been solved, false otherwise.
@@ -60,16 +51,15 @@ public class PuzzleMaster : MonoBehaviour
     {
         PlayerControl.Instance.SetHealth(MainManager.Instance.health);
         PlayerControl.Instance.GetWeapon().SetAmmo(MainManager.Instance.ammo);
-        _npcsToKill = npcs.Length;
     }
 
     /// <summary>
     /// Kills an NPC and updates according fields.
     /// </summary>
-    public void KillNPC()
+    public void KillNPC(NPC npc)
     {
-        _npcsKilled++;
-        if (_npcsKilled != _npcsToKill) return;
+        npcs.Remove(npc);
+        if (npcs.Count != 0) return;
         _puzzleSolved = true;
 
         if (hasNextPuzzle)
