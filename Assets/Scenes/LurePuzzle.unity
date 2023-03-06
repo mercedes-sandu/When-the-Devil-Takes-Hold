@@ -223,7 +223,7 @@ Transform:
   m_Children:
   - {fileID: 1153193188}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &19827911
 BoxCollider2D:
@@ -6409,7 +6409,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 405039816788145976, guid: 663af1abf1ac451429125f3515029323, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 405039816788145976, guid: 663af1abf1ac451429125f3515029323, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6496,6 +6496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObject: {fileID: 1144858178}
+  tilemapObject: {fileID: 1059071601}
   doorCoords: {x: 0, y: 0, z: 0}
   doorWidth: 0
   doorHeight: 0
