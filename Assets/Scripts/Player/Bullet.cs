@@ -19,6 +19,11 @@ public class Bullet : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
 
     /// <summary>
+    /// True if this is a stun bullet, false otherwise.
+    /// </summary>
+    [SerializeField] private bool isStunBullet = false;
+
+    /// <summary>
     /// Starts the bullet's existence.
     /// </summary>
     private void Start()

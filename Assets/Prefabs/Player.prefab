@@ -540,6 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 5326671259960628480, guid: 039c9f53220f16240a11c9f14b342f08, type: 3}
+  stunBulletPrefab: {fileID: 5326671259960628480, guid: 612f72de9431c774a80d441825e1c05b, type: 3}
   firePoint: {fileID: 7828253045559013685}
   bulletText: {fileID: 0}
   bullet: {fileID: 0}

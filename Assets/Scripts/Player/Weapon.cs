@@ -8,6 +8,11 @@ public class Weapon : MonoBehaviour
     /// The projectile bullet prefab.
     /// </summary>
     [SerializeField] private GameObject bulletPrefab;
+
+    /// <summary>
+    /// The projectile stun bullet prefab.
+    /// </summary>
+    [SerializeField] private GameObject stunBulletPrefab;
     
     /// <summary>
     /// The transform corresponding to the point at which the projectile will fire.
