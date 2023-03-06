@@ -92,12 +92,14 @@ public class HidingObject : MonoBehaviour, IInteractable
             PlayerControl.Instance.CanMove = true;
             PlayerControl.Instance.Show();
             StopHideTimer();
+            InGameUI.Instance.SetActionText("FIGHT!");
         }
         else
         {
             PlayerControl.Instance.CanMove = false;
             PlayerControl.Instance.Hide();
             StartHideTimer(hideTime);
+            InGameUI.Instance.SetActionText("HIDE!");
         }
 
         _hiding = !_hiding;

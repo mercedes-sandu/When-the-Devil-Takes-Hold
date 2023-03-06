@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1592d70278cd76543853724e08a96ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammo: 50
+  ammo: 75
   health: 100
   killTimerModifier: 0

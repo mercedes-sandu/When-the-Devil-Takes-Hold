@@ -30,7 +30,12 @@ public class InGameUI : MonoBehaviour
     /// <summary>
     /// True if the kill timer is allowed in this scene, false otherwise.
     /// </summary>
-    [SerializeField] private bool killTimerAllowed = true; // todo: remove
+    [SerializeField] private bool killTimerAllowed = true;
+
+    /// <summary>
+    /// The text that tells the player what to do (hunt, fight, hide).
+    /// </summary>
+    [SerializeField] private TextMeshProUGUI actionText;
 
     /// <summary>
     /// The amount of seconds left on the kill timer.
@@ -91,6 +96,15 @@ public class InGameUI : MonoBehaviour
     {
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
         SwitchGameState();
+    }
+    
+    /// <summary>
+    /// Sets the action text to the specified string.
+    /// </summary>
+    /// <param name="text">What the action text will say.</param>
+    public void SetActionText(string text)
+    {
+        actionText.text = text;
     }
 
     /// <summary>

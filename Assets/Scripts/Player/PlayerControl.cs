@@ -149,7 +149,14 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (CanMove) HandleMovement();
+        if (CanMove)
+        {
+            HandleMovement();
+        }
+        else
+        {
+            _rb.velocity = Vector2.zero;
+        }
         if (canUseWeapon) HandleShooting();
     }
 

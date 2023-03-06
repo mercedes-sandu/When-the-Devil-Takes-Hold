@@ -1,10 +1,11 @@
 using System.Collections;
+using System.Collections.Generic;
 using Pathfinding;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Demon : MonoBehaviour
-{ 
+{
     /// <summary>
     /// The instance of the demon, accessible by all other classes.
     /// </summary>
@@ -19,7 +20,7 @@ public class Demon : MonoBehaviour
     /// The offset at which the fireball is spawned.
     /// </summary>
     [SerializeField] private float fireballDistance;
-    
+
     /// <summary>
     /// The y-position at which the fireball is spawned.
     /// </summary>
@@ -44,7 +45,7 @@ public class Demon : MonoBehaviour
     /// The amount of damage the demon's attack deals.
     /// </summary>
     [SerializeField] private int damage;
-    
+
     /// <summary>
     /// The demon's max health.
     /// </summary>
@@ -54,12 +55,12 @@ public class Demon : MonoBehaviour
     /// The demon's health bar.
     /// </summary>
     [SerializeField] private Image healthBar;
-    
+
     /// <summary>
     /// The empty health bar for the demon that displays behind the health bar.
     /// </summary>
     [SerializeField] private Image healthBarEmpty;
-    
+
     /// <summary>
     /// The health bar UI offset
     /// </summary>
@@ -69,27 +70,27 @@ public class Demon : MonoBehaviour
     /// The transforms of the points the demon can move to.
     /// </summary>
     [SerializeField] private Transform[] movePoints;
-    
+
     /// <summary>
     /// The transform of the player's interaction point.
     /// </summary>
     [SerializeField] private Transform interactionPoint;
-    
+
     /// <summary>
     /// The radius around the interaction point that will be checked for interactable objects.
     /// </summary>
     [SerializeField] private float interactionPointRadius = 1.75f;
-    
+
     /// <summary>
     /// The layer(s) that interactable objects are on.
     /// </summary>
     [SerializeField] private LayerMask interactableMask;
-    
+
     /// <summary>
     /// The number of interactable objects found.
     /// </summary>
     [SerializeField] private int numFound;
-    
+
     /// <summary>
     /// The off-screen position the demon will move to when the hide timer is up.
     /// </summary>
@@ -104,6 +105,11 @@ public class Demon : MonoBehaviour
     /// The bruh sound clip.
     /// </summary>
     [SerializeField] private AudioClip bruhSound;
+
+    /// <summary>
+    /// The list of hide objects (their transforms).
+    /// </summary>
+    [SerializeField] private Transform[] hideObjects;
 
     /// <summary>
     /// The list of interactable objects the player can access.
@@ -134,6 +140,123 @@ public class Demon : MonoBehaviour
     /// The demon's collider.
     /// </summary>
     private BoxCollider2D _collider;
+
+    /// <summary>
+    /// The list of possible positions for the hide objects.
+    /// </summary>
+    private readonly List<Vector3> _hideObjectLocations = new List<Vector3>()
+    {
+        new Vector3(-14, 5, 0),
+        new Vector3(-13, 5, 0),
+        new Vector3(-12, 5, 0),
+        new Vector3(-11, 5, 0),
+        new Vector3(-10, 5, 0),
+        new Vector3(-9, 5, 0),
+        new Vector3(-8, 5, 0),
+        new Vector3(3, 5, 0),
+        new Vector3(4, 5, 0),
+        new Vector3(5, 5, 0),
+        new Vector3(6, 5, 0),
+        new Vector3(7, 5, 0),
+        new Vector3(8, 5, 0),
+        new Vector3(9, 5, 0),
+        new Vector3(10, 5, 0),
+        new Vector3(11, 5, 0),
+        new Vector3(12, 5, 0),
+        new Vector3(13, 5, 0),
+        new Vector3(14, 5, 0),
+        new Vector3(-12, -7, 0),
+        new Vector3(-11, -7, 0),
+        new Vector3(-10, -7, 0),
+        new Vector3(-9, -7, 0),
+        new Vector3(-8, -7, 0),
+        new Vector3(-12, -6, 0),
+        new Vector3(-11, -6, 0),
+        new Vector3(-10, -6, 0),
+        new Vector3(-9, -6, 0),
+        new Vector3(-8, -6, 0),
+        new Vector3(-12, -5, 0),
+        new Vector3(-11, -5, 0),
+        new Vector3(-10, -5, 0),
+        new Vector3(-9, -5, 0),
+        new Vector3(-8, -5, 0),
+        new Vector3(-12, -4, 0),
+        new Vector3(-11, -4, 0),
+        new Vector3(-10, -4, 0),
+        new Vector3(-9, -4, 0),
+        new Vector3(-8, -4, 0),
+        new Vector3(-12, -3, 0),
+        new Vector3(-11, -3, 0),
+        new Vector3(-10, -3, 0),
+        new Vector3(-9, -3, 0),
+        new Vector3(-8, -3, 0),
+        new Vector3(-12, -2, 0),
+        new Vector3(-11, -2, 0),
+        new Vector3(-10, -2, 0),
+        new Vector3(-9, -2, 0),
+        new Vector3(-8, -2, 0),
+        new Vector3(-12, -1, 0),
+        new Vector3(-11, -1, 0),
+        new Vector3(-10, -1, 0),
+        new Vector3(-9, -1, 0),
+        new Vector3(-8, -1, 0),
+        new Vector3(-12, 0, 0),
+        new Vector3(-11, 0, 0),
+        new Vector3(-10, 0, 0),
+        new Vector3(-9, 0, 0),
+        new Vector3(-8, 0, 0),
+        new Vector3(-12, 1, 0),
+        new Vector3(-11, 1, 0),
+        new Vector3(-10, 1, 0),
+        new Vector3(-9, 1, 0),
+        new Vector3(-8, 1, 0),
+        new Vector3(-12, 2, 0),
+        new Vector3(-11, 2, 0),
+        new Vector3(-10, 2, 0),
+        new Vector3(-9, 2, 0),
+        new Vector3(-8, 2, 0),
+        new Vector3(3, -7, 0),
+        new Vector3(4, -7, 0),
+        new Vector3(5, -7, 0),
+        new Vector3(6, -7, 0),
+        new Vector3(7, -7, 0),
+        new Vector3(8, -7, 0),
+        new Vector3(9, -7, 0),
+        new Vector3(3, -6, 0),
+        new Vector3(4, -6, 0),
+        new Vector3(5, -6, 0),
+        new Vector3(6, -6, 0),
+        new Vector3(7, -6, 0),
+        new Vector3(8, -6, 0),
+        new Vector3(9, -6, 0),
+        new Vector3(11, 0, 0),
+        new Vector3(12, 0, 0),
+        new Vector3(13, 0, 0),
+        new Vector3(14, 0, 0),
+        new Vector3(11, 1, 0),
+        new Vector3(12, 1, 0),
+        new Vector3(13, 1, 0),
+        new Vector3(14, 1, 0),
+        new Vector3(11, 2, 0),
+        new Vector3(12, 2, 0),
+        new Vector3(13, 2, 0),
+        new Vector3(14, 2, 0),
+        new Vector3(11, 3, 0),
+        new Vector3(12, 3, 0),
+        new Vector3(13, 3, 0),
+        new Vector3(14, 3, 0),
+        new Vector3(11, 4, 0),
+        new Vector3(12, 4, 0),
+        new Vector3(13, 4, 0),
+        new Vector3(14, 4, 0),
+        new Vector3(14, -5, 0), 
+        new Vector3(14, -4, 0)
+    };
+    
+    /// <summary>
+    /// The list of used positions for randomly placed objects.
+    /// </summary>
+    private List<Vector3> _usedPositions = new List<Vector3>();
 
     /// <summary>
     /// The cached moving boolean for the animator.
@@ -169,14 +292,31 @@ public class Demon : MonoBehaviour
     {
         PlayerControl.Instance.SetHealth(MainManager.Instance.health);
         PlayerControl.Instance.GetWeapon().SetAmmo(MainManager.Instance.ammo);
+
+        RandomizeHideObjects();
         
+        InGameUI.Instance.SetActionText("FIGHT!");
+
         Vector3 pos = transform.position;
         healthBarEmpty.transform.position = _camera.WorldToScreenPoint(pos + offset);
         healthBar.transform.position = _camera.WorldToScreenPoint(pos + offset);
         InvokeRepeating(nameof(FireProjectile), 5, fireTime);
         InvokeRepeating(nameof(MoveDemon), stayTime, stayTime + moveTime);
     }
-    
+
+    /// <summary>
+    /// Randomizes the positions of the hide objects.
+    /// </summary>
+    private void RandomizeHideObjects()
+    {
+        foreach (Transform hideObject in hideObjects)
+        {
+            Vector3 randomPosition = _hideObjectLocations[Random.Range(0, _hideObjectLocations.Count)];
+            _hideObjectLocations.Remove(randomPosition);
+            hideObject.position = randomPosition;
+        }
+    }
+
     /// <summary>
     /// Consistently checks for the player to do a melee attack, and moves the health bar with the demon.
     /// </summary>
@@ -187,7 +327,7 @@ public class Demon : MonoBehaviour
         //     new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
         healthBarEmpty.transform.position = _camera.WorldToScreenPoint(pos + offset);
         healthBar.transform.position = _camera.WorldToScreenPoint(pos + offset);
-        numFound = Physics2D.OverlapCircleNonAlloc(interactionPoint.position, interactionPointRadius, 
+        numFound = Physics2D.OverlapCircleNonAlloc(interactionPoint.position, interactionPointRadius,
             _colliders, interactableMask);
 
         if (numFound <= 0) return;
@@ -221,7 +361,7 @@ public class Demon : MonoBehaviour
         _currentHealth = Mathf.Clamp(_currentHealth, 0, MaxHealth);
 
         _anim.Play("DemonHurt");
-        
+
         UpdateDemonHealthBar();
 
         if (_currentHealth != 0) return;
@@ -257,7 +397,7 @@ public class Demon : MonoBehaviour
     /// </summary>
     private void UpdateDemonHealthBar()
     {
-        healthBar.fillAmount = Mathf.Clamp((float) _currentHealth / MaxHealth, 0, MaxHealth);
+        healthBar.fillAmount = Mathf.Clamp((float)_currentHealth / MaxHealth, 0, MaxHealth);
     }
 
     /// <summary>
@@ -302,7 +442,7 @@ public class Demon : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
+
         _anim.SetBool(Moving, false);
         if (movingOffScreen) GameEvent.DemonLeft();
     }
@@ -314,7 +454,7 @@ public class Demon : MonoBehaviour
     {
         PlayerControl.Instance.UpdateHealth(damage);
     }
-    
+
     /// <summary>
     /// Called by the animator when the demon finishes the dying animation.
     /// </summary>
