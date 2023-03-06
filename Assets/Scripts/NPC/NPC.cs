@@ -59,6 +59,7 @@ public class NPC : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
         moving = false;
         dir = "Down";
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -149,6 +150,21 @@ public class NPC : MonoBehaviour
     {
         _rb.velocity = Vector3.zero;
         moving = false;
+    }
+
+    public string GetDirection()
+    {
+        return dir;
+    }
+
+    public Vector3 GetDirectionVector()
+    {
+        return _direction;
+    }
+
+    public Vector3 GetPosition()
+    {
+        return _rb.position;
     }
 
     public void Turn(string direction)

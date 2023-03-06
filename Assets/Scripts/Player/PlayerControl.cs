@@ -320,6 +320,11 @@ public class PlayerControl : MonoBehaviour
     {
         return _rb.velocity;
     }
+
+    public Vector3 GetPosition()
+    {
+        return _rb.position;
+    }
     
     /// <summary>
     /// Makes the player flash red when taking damage.
