@@ -4601,7 +4601,7 @@ PrefabInstance:
     - target: {fileID: 405039816788145991, guid: 663af1abf1ac451429125f3515029323, type: 3}
       propertyPath: nextPuzzle
       value: 
-      objectReference: {fileID: 102900000, guid: 80f250eada1336a40a3d78255b5dc73a, type: 3}
+      objectReference: {fileID: 102900000, guid: 68fd81a2b3376cc47ae18c240066a709, type: 3}
     - target: {fileID: 405039816788145991, guid: 663af1abf1ac451429125f3515029323, type: 3}
       propertyPath: hasNextPuzzle
       value: 1
