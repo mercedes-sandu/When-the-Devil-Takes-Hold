@@ -10,6 +10,8 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     public static PlayerControl Instance = null;
 
+    public bool hasKey;
+
     /// <summary>
     /// True if the player can move, false otherwise.
     /// </summary>
@@ -129,6 +131,8 @@ public class PlayerControl : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
         _collider = GetComponent<BoxCollider2D>();
         _audioSource = GetComponent<AudioSource>();
+
+        hasKey = false;
 
         GameEvent.OnPlayerDetonate += DisableTorch;
     }
