@@ -18,6 +18,25 @@ public class NPC : MonoBehaviour
     [SerializeField] private GameObject explosionPrefab;
 
     /// <summary>
+    /// The player's movement speed.
+    /// </summary>
+    [SerializeField] private float speed = 5f;
+
+    /// <summary>
+    /// The player's rigidbody component.
+    /// </summary>
+    private Rigidbody2D _rb;
+
+    /// <summary>
+    /// The point at which the NPC stops walking
+    /// </summary>
+    private Vector3 _stoppingPoint;
+
+    private string dir;
+
+    private bool moving;
+
+    /// <summary>
     /// The NPC sprite renderer.
     /// </summary>
     private SpriteRenderer _sr;
@@ -28,13 +47,55 @@ public class NPC : MonoBehaviour
     private int _currentHealth = MaxHealth;
 
     /// <summary>
+    /// The direction in which the player is facing.
+    /// </summary>
+    private Vector2 _direction = Vector2.down;
+
+    /// <summary>
     /// Initialize component.
     /// </summary>
     private void Start()
     {
         _sr = GetComponent<SpriteRenderer>();
+        moving = false;
+        dir = "Down";
     }
-    
+
+    private void Update()
+    {
+        if (moving)
+        {
+            if (dir == "Down")
+            {
+                if (_rb.position.y <= _stoppingPoint.x)
+                {
+                    StopWalk();
+                }
+            }
+            else if (dir == "Up")
+            {
+                if (_rb.position.y >= _stoppingPoint.y)
+                {
+                    StopWalk();
+                }
+            }
+            else if (dir == "Left")
+            {
+                if (_rb.position.x <= _stoppingPoint.x)
+                {
+                    StopWalk();
+                }
+            }
+            else if (dir == "Right")
+            {
+                if (_rb.position.x >= _stoppingPoint.x)
+                {
+                    StopWalk();
+                }
+            }
+        }
+    }
+
     /// <summary>
     /// Takes the amount of damage/healing done as an input and changes player health.
     /// </summary>
@@ -75,5 +136,38 @@ public class NPC : MonoBehaviour
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         PuzzleMaster.Instance.KillNPC(this);
         Destroy(gameObject);
+    }
+
+    public void Walk(Vector3 stoppingPoint)
+    {
+        _stoppingPoint = stoppingPoint;
+        _rb.velocity = _direction * speed;
+        moving = true;
+    }
+
+    private void StopWalk()
+    {
+        _rb.velocity = Vector3.zero;
+        moving = false;
+    }
+
+    public void Turn(string direction)
+    {
+        if (direction == "Up")
+        {
+            _direction = Vector3.up;
+        }
+        else if (direction == "Down")
+        {
+            _direction = Vector3.down;
+        }
+        else if (direction == "Left")
+        {
+            _direction = Vector3.left;
+        }
+        else if (direction == "Right")
+        {
+            _direction = Vector3.right;
+        }
     }
 }
