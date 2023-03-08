@@ -80,6 +80,9 @@ public class GameMaster : MonoBehaviour
     /// <param name="won">True if the player won, false otherwise.</param>
     private void GameOver(bool won)
     {
+        MainManager.Instance.health = 100;
+        MainManager.Instance.ammo = 75;
+        MainManager.Instance.killTimerModifier = 0;
         SceneManager.LoadScene(won ? winScene.name : loseScene.name);
     }
 

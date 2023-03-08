@@ -118,11 +118,14 @@ public class InGameUI : MonoBehaviour
     }
 
     /// <summary>
-    /// Quits the game.
+    /// Quits the game to the start menu.
     /// </summary>
     public void QuitButton()
     {
-        Application.Quit();
+        MainManager.Instance.health = 100;
+        MainManager.Instance.ammo = 75;
+        MainManager.Instance.killTimerModifier = 0;
+        SceneManager.LoadScene("StartMenu");
     }
 
     /// <summary>
