@@ -22,6 +22,11 @@ public class MainManager : MonoBehaviour
     /// the time.
     /// </summary>
     public int killTimerModifier;
+
+    /// <summary>
+    /// The puzzle the player is currently working on/has not finished.
+    /// </summary>
+    public string currentPuzzle;
     
     /// <summary>
     /// Sets the instance and makes it persist between scenes.

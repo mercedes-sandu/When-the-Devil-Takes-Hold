@@ -27,6 +27,8 @@ public class NPC : MonoBehaviour
     /// </summary>
     private Rigidbody2D _rb;
 
+    private BoxCollider2D _collider;
+
     /// <summary>
     /// The point at which the NPC stops walking
     /// </summary>
@@ -60,6 +62,7 @@ public class NPC : MonoBehaviour
         moving = false;
         dir = "Down";
         _rb = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<BoxCollider2D>();
     }
 
     private void Update()
@@ -109,6 +112,7 @@ public class NPC : MonoBehaviour
 
         if (_currentHealth == 0)
         {
+            _collider.enabled = false;
             Invoke(nameof(SelfDestruct), 0.25f);
         }
     }
@@ -135,8 +139,8 @@ public class NPC : MonoBehaviour
     {
         GameEvent.ChangeKillTimerDuration(killTimerModifier);
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        _sr.enabled = false;
         PuzzleMaster.Instance.KillNPC(this);
-        Destroy(gameObject);
     }
 
     public void Walk(Vector3 stoppingPoint)

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FightFadeToBlack : MonoBehaviour
 {
@@ -7,6 +8,10 @@ public class FightFadeToBlack : MonoBehaviour
     /// </summary>
     private void LoadPuzzleLevel()
     {
+#if UNITY_EDITOR
         GameMaster.Instance.LoadScene();
+#else
+        SceneManager.LoadScene(MainManager.Instance.currentPuzzle);
+#endif
     }
 }

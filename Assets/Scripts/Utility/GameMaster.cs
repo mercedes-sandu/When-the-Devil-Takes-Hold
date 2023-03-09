@@ -44,7 +44,9 @@ public class GameMaster : MonoBehaviour
 
         DontDestroyOnLoad(this);
         
+#if UNITY_EDITOR
         GameEvent.OnNextPuzzle += SetNextPuzzle;
+#endif
         GameEvent.OnGameOver += GameOver;
     }
 
@@ -62,7 +64,6 @@ public class GameMaster : MonoBehaviour
     /// <param name="puzzle"></param>
     private void SetNextPuzzle(Object puzzle)
     {
-        Debug.Log("setting next puzzle to " + puzzle.name);
         _nextPuzzle = puzzle;
     }
 
@@ -83,7 +84,11 @@ public class GameMaster : MonoBehaviour
         MainManager.Instance.health = 100;
         MainManager.Instance.ammo = 75;
         MainManager.Instance.killTimerModifier = 0;
+#if UNITY_EDITOR
         SceneManager.LoadScene(won ? winScene.name : loseScene.name);
+#else
+        SceneManager.LoadScene(won ? "GameOverWin" : "GameOverLose");
+#endif
     }
 
     /// <summary>
@@ -91,7 +96,9 @@ public class GameMaster : MonoBehaviour
     /// </summary>
     private void OnDestroy()
     {
+#if UNITY_EDITOR
         GameEvent.OnNextPuzzle -= SetNextPuzzle;
+#endif
         GameEvent.OnGameOver -= GameOver;
     }
 }

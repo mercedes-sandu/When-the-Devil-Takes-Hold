@@ -157,6 +157,14 @@ public class InGameUI : MonoBehaviour
     }
 
     /// <summary>
+    /// Stops the timer coroutine.
+    /// </summary>
+    public void StopCoroutine()
+    {
+        StopCoroutine(_lastCoroutine);
+    }
+
+    /// <summary>
     /// Increases/decreases the maximum kill timer duration (in seconds).
     /// </summary>
     /// <param name="time">The new timer modification (in seconds), positive being an increase and negative being
@@ -182,7 +190,7 @@ public class InGameUI : MonoBehaviour
     /// </summary>
     private void LoadScene()
     {
-        SceneManager.LoadScene(scene.name);
+        SceneManager.LoadScene("FightScene");
     }
 
     /// <summary>

@@ -34,6 +34,16 @@ public class PuzzleMaster : MonoBehaviour
     /// </summary>
     private AudioSource _audioSource;
 
+    private Dictionary<string, string> _puzzleAndNextPuzzle = new Dictionary<string, string>()
+    {
+        {"PuzzleOne", "PuzzleTwo"},
+        {"PuzzleTwo", "PuzzleThree"},
+        {"PuzzleThree", "PuzzleFour"},
+        {"PuzzleFour", "PuzzleFive"},
+        {"PuzzleFive", "PuzzleSeven"},
+        {"PuzzleSeven", "PuzzleEight"}
+    };
+
     /// <summary>
     /// Initializes the instance.
     /// </summary>
@@ -61,6 +71,8 @@ public class PuzzleMaster : MonoBehaviour
         
         InGameUI.Instance.SetActionText("HUNT!");
         
+        MainManager.Instance.currentPuzzle = SceneManager.GetActiveScene().name;
+        
         _audioSource.Play();
     }
 
@@ -72,17 +84,8 @@ public class PuzzleMaster : MonoBehaviour
         npcs.Remove(npc);
         if (npcs.Count != 0) return;
         _puzzleSolved = true;
-
-        if (hasNextPuzzle)
-        {
-            GameEvent.SetNextPuzzle(nextPuzzle);
-            Debug.Log("set next puzzle to " + nextPuzzle.name + " in PuzzleMaster");
-            Invoke(nameof(LoadNextPuzzle), 1);
-        }
-        else
-        {
-            Invoke(nameof(Win), 1);
-        }
+        InGameUI.Instance.StopCoroutine();
+        Invoke(hasNextPuzzle ? nameof(LoadNextPuzzle) : nameof(Win), 1);
     }
 
     /// <summary>
@@ -91,7 +94,20 @@ public class PuzzleMaster : MonoBehaviour
     private void LoadNextPuzzle()
     {
         if (_audioSource.isPlaying) _audioSource.Stop();
-        SceneManager.LoadScene(nextPuzzle.name);
+#if UNITY_EDITOR
+        if (hasNextPuzzle)
+        {
+            GameEvent.SetNextPuzzle(nextPuzzle);
+            Invoke(nameof(LoadNextPuzzle), 1);
+        }
+        else
+        {
+            Invoke(nameof(Win), 1);
+        }
+#else
+        string puzzleName = _puzzleAndNextPuzzle[SceneManager.GetActiveScene().name];
+        SceneManager.LoadScene(puzzleName);
+#endif
     }
 
     /// <summary>
