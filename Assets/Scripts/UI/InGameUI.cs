@@ -122,6 +122,7 @@ public class InGameUI : MonoBehaviour
     /// </summary>
     public void QuitButton()
     {
+        _paused = !_paused;
         MainManager.Instance.health = 100;
         MainManager.Instance.ammo = 75;
         MainManager.Instance.killTimerModifier = 0;
